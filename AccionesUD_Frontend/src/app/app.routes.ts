@@ -5,6 +5,8 @@ import { MenuComponent } from './menu/menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 
+
+/*
 export const routes: Routes = [
   { path: '', component: CuerpoPrincipalComponent },
   { path: 'registro', component: VistaRegistroComponent },
@@ -15,4 +17,12 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
 ];
-// 
+//
+*/
+
+export const routes: Routes = [
+  { path: '', component: CuerpoPrincipalComponent },
+  { path: 'registro', component: VistaRegistroComponent },
+  { path: '', component: MenuComponent },
+  //{ path: 'dashboard', component: DashboardComponent }, // Sin guard para pruebas
+];

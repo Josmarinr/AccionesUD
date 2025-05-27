@@ -52,6 +52,9 @@ export class MenuComponent {
     }, 400);
   }
 
+  /*DESACTIVACION TEMPORAL DEL MÉTODO DE AUTENTICACION PARA FACILITAR LAS PRUEBAS*/
+
+  /*
   onSubmit() {
     if (!this.showOtpField) {
       const loginPayload = {
@@ -98,10 +101,7 @@ export class MenuComponent {
     }
   }
 
-  volverAlInicio() {
-    this.cerrarModal();
-    this.router.navigate(['/']);
-  }
+
 
   get usuarioAutenticado(): boolean {
     const token = localStorage.getItem('jwt');
@@ -109,6 +109,26 @@ export class MenuComponent {
 
     const payload = JSON.parse(atob(token.split('.')[1]));
     return Date.now() < payload.exp * 1000;
+  }
+
+  */
+
+  onSubmit() {
+    // Simulación de login sin validación
+    const fakeToken = 'fake.jwt.token';
+    localStorage.setItem('jwt', fakeToken);
+    this.mensaje = 'Inicio de sesión simulado.';
+    this.cerrarModal();
+    this.router.navigate(['/dashboard']);
+  }
+
+  get usuarioAutenticado(): boolean {
+    return !!localStorage.getItem('jwt');
+  }
+
+  volverAlInicio() {
+    this.cerrarModal();
+    this.router.navigate(['/']);
   }
 
   cerrarSesion() {
