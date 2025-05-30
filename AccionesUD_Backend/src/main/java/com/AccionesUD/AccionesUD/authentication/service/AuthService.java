@@ -16,6 +16,10 @@ import com.AccionesUD.AccionesUD.authentication.dto.RegisterRequest;
 import com.AccionesUD.AccionesUD.authentication.entity.Role;
 import com.AccionesUD.AccionesUD.authentication.entity.User;
 import com.AccionesUD.AccionesUD.authentication.repository.UserRepository;
+import com.AccionesUD.AccionesUD.exception.auth.InvalidOtpException;
+import com.AccionesUD.AccionesUD.exception.auth.OtpExpiredException;
+import com.AccionesUD.AccionesUD.exception.user.DuplicateUserException;
+import com.AccionesUD.AccionesUD.exception.user.UserNotFoundException;
 import com.AccionesUD.AccionesUD.global.security.JwtService;
 
 import lombok.RequiredArgsConstructor;
@@ -46,7 +50,8 @@ public class AuthService {
         long now = System.currentTimeMillis();
         otpStorage.put(request.getUsername(), new OtpEntry(otp, now));
 
-        User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        User user = userRepository.findByUsername(request.getUsername()).orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
+
         emailService.sendOtpEmail(user.getUsername(), otp); // Asumimos username == email
 
         return "OTP sent to your email";
@@ -56,18 +61,20 @@ public class AuthService {
         OtpEntry entry = otpStorage.get(request.getUsername());
 
         if (entry == null || !entry.code().equals(request.getOtp())) {
-            throw new RuntimeException("Invalid OTP");
+            throw new InvalidOtpException("OTP inválido");
         }
 
         long now = System.currentTimeMillis();
         if (now - entry.timestamp() > OTP_VALIDITY_MILLIS) {
             otpStorage.remove(request.getUsername());
-            throw new RuntimeException("OTP expired");
+            throw new OtpExpiredException("OTP expirado");
         }
 
         otpStorage.remove(request.getUsername());
 
-        User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        User user = userRepository.findByUsername(request.getUsername())
+            .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado"));
+
         String token = jwtService.getToken(user);
 
         return AuthResponse.builder().token(token).build();
@@ -76,12 +83,12 @@ public class AuthService {
    public AuthResponse register(RegisterRequest request) {
     // Verificar si el username ya existe
     if (userRepository.existsByUsername(request.getUsername())) {
-        throw new RuntimeException("El correo electrónico ya está registrado.");
+        throw new DuplicateUserException("El correo electrónico ya está registrado.");
     }
 
     // Verificar si el ID ya existe
     if (userRepository.existsById(request.getId())) {
-        throw new RuntimeException("Ya existe un usuario con esta identificación.");
+        throw new DuplicateUserException("Ya existe un usuario con esta identificación.");
     }
 
     User user = User.builder()
@@ -101,6 +108,5 @@ public class AuthService {
         .token(jwtService.getToken(user))
         .build();
 }
-
 
 }
