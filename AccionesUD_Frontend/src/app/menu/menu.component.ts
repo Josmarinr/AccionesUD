@@ -135,4 +135,12 @@ export class MenuComponent {
     localStorage.removeItem('jwt');
     this.router.navigate(['/']);
   }
+
+
+  scrollToBottom(duration: number) {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  }
 }

@@ -11,8 +11,12 @@
     </div>
     <ul class="menu">
       <li><a href="#">Invierte</a></li>
-      <li><a href="#">Conócenos</a></li>
-      <li><a href="#">Políticas</a></li>
+      <li>
+        <a href="javascript:void(0)" (click)="scrollToBottom(3000)">Conócenos</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)" (click)="scrollToBottom(3000)">Políticas</a>
+      </li>
     </ul>
   </div>
   <div class="actions">
@@ -26,7 +30,7 @@
     <button class="cerrar-btn" (click)="cerrarModal()" aria-label="Cerrar modal">&times;</button>
     <h2>Iniciar sesión</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="formulario-contenedor">
-      
+
       <div class="form-group">
         <label for="usuario">Correo electrónico</label>
         <input
@@ -37,6 +41,14 @@
           placeholder="Ej. nombre@correo.com"
           required
         />
+        <div *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)" class="error">
+          <div *ngIf="loginForm.get('username')?.errors?.['required']" style="color: red;">
+            El correo es obligatorio.
+          </div>
+          <div *ngIf="loginForm.get('username')?.errors?.['email']" style="color: red;">
+            Ingrese un correo válido.
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -49,6 +61,12 @@
           placeholder="Introduce tu contraseña"
           required
         />
+        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error">
+          <div *ngIf="loginForm.get('password')?.errors?.['required']" style="color: red;">La contraseña es requerida.</div>
+          <div *ngIf="loginForm.get('password')?.errors?.['incorrect']" style="color: red;">
+            La contraseña o el correo son incorrectos.
+          </div>
+        </div>
       </div>
 
       <div *ngIf="showOtpField" class="form-group">
@@ -75,7 +93,7 @@
     <div class="registro-link">
       ¿No tienes cuenta?
       <a href="/registro">Regístrate</a> |
-      <a (click)="volverAlInicio()" style="cursor: pointer;">Volver al inicio</a>
+      <a (click)="volverAlInicio()" style="cursor: pointer;">Olvide mi contraseña</a>
     </div>
   </div>
 </div>
