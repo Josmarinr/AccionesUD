@@ -130,6 +130,21 @@
   color: #333;
 }
 
+.orden-cantidad input::-webkit-inner-spin-button,
+.orden-cantidad input::-webkit-outer-spin-button {
+  cursor: pointer;
+  border: 1px solid;
+  opacity: 1 !important;
+  padding: auto;
+}
+
+.orden-cantidad input:invalid {
+  border: 1px solid red;
+  /* Puedes agregar otros estilos, como background-color o box-shadow */
+  background-color: #ffe6e6;
+  color: #d40000;
+}
+
 .cantidad-label {
   font-size: 1rem;
   color: #555;
