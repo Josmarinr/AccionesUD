@@ -1,0 +1,51 @@
+<app-menu style="position: fixed; top: 0; left: 0; width: 100vw; z-index: 1000;"></app-menu>
+
+<div class="ordenes-lista">
+
+  <div class="orden-tarjeta" *ngFor="let orden of ordenes">
+    <div class="orden-info">
+      <div class="orden-header">
+        <img [src]="orden.logo" alt="{{orden.name}}" class="orden-logo">
+        <div>
+          <div class="orden-titulo">{{orden.name}}</div>
+          <div class="orden-subtitulo">{{orden.country}}</div>
+        </div>
+      </div>
+      <div class="orden-precios">
+        <button class="orden-precio comprar">
+
+          <div class="valor">{{orden.compraPrecio}} <span class="moneda">{{orden.moneda}}</span></div>
+          Comprar
+
+        </button>
+        <button class="orden-precio vender">
+
+          <div class="valor">{{orden.ventaPrecio}} <span class="moneda">{{orden.moneda}}</span></div>
+          Vender
+
+        </button>
+      </div>
+      <div class="orden-cantidad">
+        <input type="number"
+         min="0.1"
+         [max]="orden.cantidad"
+         step="0.1"
+         [value]="orden.cantidad">
+        <span class="cantidad-label">Cantidad</span>
+        <div class="cantidad-controles">
+          <button (click)="orden.cantidad = (orden.cantidad + 0.1)">&uarr;</button>
+          <button (click)="orden.cantidad = (orden.cantidad - 0.1)">&darr;</button>
+        </div>
+      </div>
+    </div>
+    <div class="orden-grafica">
+      <img [src]="orden.grafica" alt="Gráfica de {{orden.name}}">
+    </div>
+
+
+  </div>
+  <app-pie-pagina-principal style="position: flex; width: 99.2vw; height: 100%; top: -0;"></app-pie-pagina-principal>
+</div>
+
+
+
