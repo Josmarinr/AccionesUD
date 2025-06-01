@@ -1,7 +1,14 @@
+.perfil{
+  position: relative;
+  background: linear-gradient(to right, rgb(247, 200, 200), #ffffff);
+  height: 100vh;
+  padding-bottom: 100px;
+}
 .perfil-container {
   position: relative;
   top: 170px;
-  max-width: 700px;
+  width: 100%;
+  max-width: 900px;
   margin: 3rem auto;
   padding: 2.5rem;
   background: linear-gradient(to right, #ffffff, rgb(247, 200, 200));
@@ -138,4 +145,49 @@ button[type="submit"]:hover {
   position: relative;
   top: 280px;
   }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  margin-left: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #fff;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: #e6574f;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
 }
