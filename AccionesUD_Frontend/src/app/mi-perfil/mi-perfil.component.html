@@ -1,45 +1,64 @@
 <app-menu style="position: fixed; top: 0; left: 0; width: 101vw; z-index: 1000;"></app-menu>
-<div class="perfil-container">
-  <button class="cerrar-btn" (click)="cancelarRegistro()" aria-label="Cancelar registro">&times;</button>
-  <h2>Mi Perfil</h2>
-  <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="form-field">
-        <label for="firstname">Nombre</label>
-        <input id="firstname" formControlName="firstname" placeholder="Ej. Juan" />
+<div class="perfil">
+  <div class="perfil-container">
+    <button class="cerrar-btn" (click)="cancelarRegistro()" aria-label="Cancelar registro">&times;</button>
+    <h2>Mi Perfil</h2>
+    <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-field">
+          <label for="firstname">Nombre</label>
+          <input id="firstname" formControlName="firstname" placeholder="Ej. Juan" />
+        </div>
+        <div class="form-field">
+          <label for="lastname">Apellido</label>
+          <input id="lastname" formControlName="lastname" placeholder="Ej. Pérez" />
+        </div>
       </div>
-      <div class="form-field">
-        <label for="lastname">Apellido</label>
-        <input id="lastname" formControlName="lastname" placeholder="Ej. Pérez" />
+
+      <div class="row">
+        <div class="form-field">
+          <label for="id">Cédula</label>
+          <input id="id" formControlName="id" placeholder="Ej. 1020304050" />
+        </div>
+        <div class="form-field">
+          <label for="phone">Teléfono</label>
+          <input id="phone" formControlName="phone" placeholder="Ej. 3001234567" />
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="form-field">
-        <label for="id">Cédula</label>
-        <input id="id" formControlName="id" placeholder="Ej. 1020304050" />
+      <div class="row">
+        <div class="form-field">
+          <label for="username">Correo</label>
+          <input id="username" type="email" formControlName="username" placeholder="Ej. usuario@correo.com" />
+        </div>
       </div>
+
       <div class="form-field">
-        <label for="phone">Teléfono</label>
-        <input id="phone" formControlName="phone" placeholder="Ej. 3001234567" />
+        <label for="address">Dirección</label>
+        <textarea id="address" formControlName="address" placeholder="Ej. Calle 123 #45-67, Bogotá"></textarea>
       </div>
-    </div>
 
-    <div class="row">
+      <div class="row">
+        <label for="otpToggle">Activar OTP</label>
+        <label class="switch">
+            <input type="checkbox" id="otpToggle"/>
+            <span class="slider"></span>
+        </label>
+      </div>
+
       <div class="form-field">
-        <label for="username">Correo</label>
-        <input id="username" type="email" formControlName="username" placeholder="Ej. usuario@correo.com" />
+        <label for="dailyOrderLimit">Límite de órdenes diaria</label>
+        <div class="number-input">
+        <input type="number" id="dailyOrderLimit" min="1" value="1" />
+        </div>
       </div>
-    </div>
 
-    <div class="form-field">
-      <label for="address">Dirección</label>
-      <textarea id="address" formControlName="address" placeholder="Ej. Calle 123 #45-67, Bogotá"></textarea>
-    </div>
+      <button type="submit">Guardar Cambios</button>
+    </form>
 
-    <button type="submit">Guardar Cambios</button>
-  </form>
+    <div class="perfil-footer">
+      <p>¿Necesitas ayuda? <a href="https://www.ejemplo.com/ayuda" target="_blank">Contáctanos</a></p>
+  </div>
 
-  <div class="perfil-footer">
-    <p>¿Necesitas ayuda? <a href="https://www.ejemplo.com/ayuda" target="_blank">Contáctanos</a></p>
+  </div>
 </div>
