@@ -13,10 +13,10 @@ import com.AccionesUD.AccionesUD.authentication.dto.AuthResponse;
 import com.AccionesUD.AccionesUD.authentication.dto.LoginRequest;
 import com.AccionesUD.AccionesUD.authentication.dto.OtpRequest;
 import com.AccionesUD.AccionesUD.authentication.dto.RegisterRequest;
-import com.AccionesUD.AccionesUD.authentication.entity.Role;
-import com.AccionesUD.AccionesUD.authentication.entity.User;
-import com.AccionesUD.AccionesUD.authentication.repository.UserRepository;
 import com.AccionesUD.AccionesUD.global.security.JwtService;
+import com.AccionesUD.AccionesUD.usuario.entity.Role;
+import com.AccionesUD.AccionesUD.usuario.entity.User;
+import com.AccionesUD.AccionesUD.usuario.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
