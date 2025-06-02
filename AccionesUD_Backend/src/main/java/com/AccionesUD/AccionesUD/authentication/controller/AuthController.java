@@ -10,7 +10,7 @@ import com.AccionesUD.AccionesUD.authentication.dto.AuthResponse;
 import com.AccionesUD.AccionesUD.authentication.dto.LoginRequest;
 import com.AccionesUD.AccionesUD.authentication.dto.OtpRequest;
 import com.AccionesUD.AccionesUD.authentication.dto.RegisterRequest;
-import com.AccionesUD.AccionesUD.authentication.service.AuthService;
+import com.AccionesUD.AccionesUD.usuario.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
 
