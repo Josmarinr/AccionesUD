@@ -1,4 +1,4 @@
-package com.AccionesUD.AccionesUD.authentication.entity;
+package com.AccionesUD.AccionesUD.usuario.entity;
 
 import java.util.Collection;
 import java.util.List;
