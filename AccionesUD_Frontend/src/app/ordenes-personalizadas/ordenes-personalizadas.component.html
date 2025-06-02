@@ -12,13 +12,13 @@
         </div>
       </div>
       <div class="orden-precios">
-        <button class="orden-precio comprar">
+        <button class="orden-precio comprar" (click)="abrirModal(orden, 'Comprar')">
 
           <div class="valor">{{orden.compraPrecio}} <span class="moneda">{{orden.moneda}}</span></div>
           Comprar
 
         </button>
-        <button class="orden-precio vender">
+        <button class="orden-precio vender" (click)="abrirModal(orden, 'Vender')">
 
           <div class="valor">{{orden.ventaPrecio}} <span class="moneda">{{orden.moneda}}</span></div>
           Vender
@@ -26,11 +26,12 @@
         </button>
       </div>
       <div class="orden-cantidad">
-        <input type="number"
+        <!-- <input type="number"
          min="0.1"
          [max]="orden.cantidad"
          step="0.1"
-         [value]="orden.cantidad">
+         [value]="orden.cantidad"> -->
+        <span class="cantidad">{{orden.cantidad}}</span>
         <span class="cantidad-label">Cantidad</span>
       </div>
     </div>
@@ -43,5 +44,109 @@
   <app-pie-pagina-principal style="position: flex; width: 99.2vw; height: 100%; top: -0;"></app-pie-pagina-principal>
 </div>
 
+<!-- Modal -->
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-contenido">
+    <button class="modal-cerrar" (click)="cerrarModal()">X</button>
+    <h2 class="modal-titulo">{{modalTitulo}}</h2>
+    <div class="orden-header-modal">
+        <img [src]="ordenSeleccionada?.logo" alt="{{ordenSeleccionada?.name}}" class="orden-logo">
+        <div>
+          <div class="orden-titulo-modal">{{ordenSeleccionada?.name}}</div>
+          <div class="orden-subtitulo-modal">{{ordenSeleccionada?.country}}</div>
+        </div>
+    </div>
 
+    <div class="orden-cantidadprecios-modal">
+      <label class="cantidad-modal" for="cantidad">Cantidad:
+        <input type="number" id="cantidad" step="0.1" min="0.1" [(ngModel)]="cantidad" max="{{ordenSeleccionada?.cantidad}}">
+      </label>
+      <label class="precio-modal" for="precio">Precio:
+        <p>{{ordenSeleccionada?.compraPrecio}}</p>
+      </label>
+    </div>
 
+    <div class="datos-modal">
+      <label class="spread">Spread:
+        <p>{{ordenSeleccionada?.spread}} <span class="moneda">{{ordenSeleccionada?.moneda}}</span>
+        </p>
+        <p>({{ordenSeleccionada?.spreadpips}}) pips</p>
+      </label>
+      <label class="comision">Comisión:
+        <p>{{ordenSeleccionada?.comision}} <span class="moneda">{{ordenSeleccionada?.moneda}}</span>
+        </p>
+        <p>({{ordenSeleccionada?.comisionporsentaje}}) %</p>
+      </label>
+      <label class="valorpip">Valor del pip:
+        <p>{{ordenSeleccionada?.valorPip}} <span class="moneda">{{ordenSeleccionada?.moneda}}</span>
+        </p>
+      </label>
+      <label class="swap">Swap diario:
+        <p class="datos-comprar">Comprar: {{ordenSeleccionada?.swapDiarioCompra}} <span class="moneda">{{ordenSeleccionada?.moneda}}</span>
+        </p>
+        <p class="datos-vender">Vender: {{ordenSeleccionada?.swapDiarioVenta}} <span class="moneda">{{ordenSeleccionada?.moneda}}</span>
+        </p>
+      </label>
+    </div>
+
+    <div class="tipo-orden-precioespecifico">
+      <div class="tipo-orden">
+        <label>
+          <label for="marketOrder">Market Order</label>
+          <label class="switch">
+              <input type="radio" name="orderType" value="market">
+              <span class="slider"></span>
+          </label>
+        </label>
+        <label>
+          <label for="limitOrder">Limit Order</label>
+          <label class="switch">
+              <input type="radio" name="orderType" value="market">
+              <span class="slider"></span>
+          </label>
+        </label>
+      </div>
+      <div class="precio-especifico">
+        <label for="precioEspecifico">Precio específico:</label>
+        <input type="number" id="precioEspecifico" step="0.01" min="0.01" max="{{ordenSeleccionada?.compraPrecio}}" [value]="ordenSeleccionada?.compraPrecio">
+      </div>
+    </div>
+
+    <div class="loss-take">
+      <label class="stop-loss">
+        <label>
+          <label for="stopLoss">Stop Loss:</label>
+          <label class="switch">
+                <input type="checkbox" name="stop-loss" value="stop">
+                <span class="slider"></span>
+          </label>
+        </label>
+        <input type="number" id="stopLoss" step="0.01" min="0.01" max="{{ordenSeleccionada?.compraPrecio}}" [value]="0.01">
+      </label>
+
+      <label class="take-profit">
+        <label>
+          <label for="takeProfit">Take Profit:</label>
+          <label class="switch">
+                <input type="checkbox" name="take-profit" value="take">
+                <span class="slider"></span>
+          </label>
+        </label>
+        <input type="number" id="takeProfit" step="0.01" min="0.01" max="{{ordenSeleccionada?.compraPrecio}}">
+      </label>
+    </div>
+
+    <div class="totales-modal">
+      <label class="total-estimado">Total estimado: <span class="datototal">{{ordenSeleccionada?.totalEstimado}}</span>&nbsp;<span class="moneda">{{ordenSeleccionada?.moneda}}</span>
+      </label>
+
+      <label class="saldo-disponible">Saldo disponible: <span class="datosaldo">{{ordenSeleccionada?.saldoDisponible}}</span>&nbsp;<span class="moneda">{{ordenSeleccionada?.moneda}}</span>
+      </label>
+    </div>
+
+    <div class="botones-modal">
+      <button class="cancelar-modal" (click)="cerrarModal()">Cancelar</button>
+      <button class="confirmar-modal" (click)="enviarOrden()">Enviar orden</button>
+    </div>
+  </div>
+</div>
