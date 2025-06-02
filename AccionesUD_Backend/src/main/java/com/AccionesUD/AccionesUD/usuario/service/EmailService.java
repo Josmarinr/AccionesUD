@@ -1,4 +1,4 @@
-package com.AccionesUD.AccionesUD.authentication.service;
+package com.AccionesUD.AccionesUD.usuario.service;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
