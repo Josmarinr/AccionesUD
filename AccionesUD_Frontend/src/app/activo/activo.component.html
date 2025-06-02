@@ -1,0 +1,15 @@
+<div class="stock-card">
+  <div class="info">
+    <h2>{{ nombreActivo }}</h2>
+    <p>{{ pais }}</p>
+    <div>
+      <div class="price buy">{{ precioCompra }} USD<br>Comprar</div>
+      <div class="price sell">{{ precioVenta  }} USD<br>Vender</div>
+    </div>
+    <div class="volume">
+      <input type="number" step="0.1" /><br>
+      <label>Cantidad</label>
+    </div>
+  </div>
+  <div id="{{nombreActivo}}-chart"></div>
+</div>

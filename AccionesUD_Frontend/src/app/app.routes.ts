@@ -3,6 +3,7 @@ import { VistaRegistroComponent } from './vista-registro/vista-registro.componen
 import { CuerpoPrincipalComponent } from './cuerpo-principal/cuerpo-principal.component';
 import { MenuComponent } from './menu/menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ActivoComponent } from './activo/activo.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -14,5 +15,9 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'activo',
+    component: ActivoComponent
+  }
 ];
 // 

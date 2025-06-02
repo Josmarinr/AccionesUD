@@ -1,0 +1,48 @@
+.stock-card {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: rgb(42, 52, 72,0.2);
+}
+
+.stock-card:hover {
+  transform: scale(1.005);
+  box-shadow: 0 4px 5px rgba(0,0,0,0.3);
+  border: 2px solid rgb(0, 145, 12);
+}
+
+.info {
+  width: 40%;
+  text-align: center;
+}
+
+.price {
+  display: inline-block;
+  width: 45%;
+  text-align: center;
+  border-radius: 7px;
+  margin: 2%;
+}
+
+.buy {
+  background-color: rgb(42, 52, 72,0.8);
+}
+
+.sell {
+  background-color: rgb(230, 87, 79,0.8);
+}
+
+.volume {
+  display: inline-block;
+  justify-content: center;
+}
+
+.volume input{
+  width: 50%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgb(255, 255, 255,0.8);
+  text-align: center;
+}
