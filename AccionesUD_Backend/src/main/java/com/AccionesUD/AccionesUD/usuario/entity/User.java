@@ -44,6 +44,14 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Role role; // Por defecto será USER
 
+    @Column(nullable = false)
+    private boolean otpEnabled = false;
+
+    @Column(nullable = false)
+    private int dailyOrderLimit = 1;
+
+
+
     // Métodos obligatorios de UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
