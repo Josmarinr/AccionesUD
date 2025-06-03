@@ -1,5 +1,6 @@
 package com.AccionesUD.AccionesUD.authentication.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -9,23 +10,27 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class EmailService {
+
     private final JavaMailSender mailSender;
 
-public void sendOtpEmail(String to, String otp) {
-    SimpleMailMessage message = new SimpleMailMessage();
-    message.setTo(to);
-    message.setSubject("Tu código OTP");
-    message.setText("Tu código de verificación es: " + otp);
-    mailSender.send(message);
-}
+    @Value("${app.mail.from}")
+    private String fromEmail;
 
+    public void sendOtpEmail(String to, String otp) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail); // ✅ remitente dinámico
+        message.setTo(to);
+        message.setSubject("Tu código OTP");
+        message.setText("Tu código de verificación es: " + otp);
+        mailSender.send(message);
+    }
 
-public void sendEmail(String to, String subject, String body) {
-    SimpleMailMessage message = new SimpleMailMessage();
-    message.setTo(to);
-    message.setSubject(subject);
-    message.setText(body);
-    mailSender.send(message);
-}
-
+    public void sendEmail(String to, String subject, String body) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail); // ✅ remitente dinámico
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
+    }
 }
