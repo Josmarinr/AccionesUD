@@ -552,3 +552,196 @@
 .botones-modal .confirmar-modal:hover {
   background: #218838;
 }
+
+/* modal confirmacion*/
+.modal-confirmacion {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: overlayFadeIn 0.4s forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { background: rgba(0,0,0,0); }
+  to   { background: rgba(0,0,0,0.5); }
+}
+
+.modal-contenido-confirmacion {
+  background: linear-gradient(45deg, #f8a8a8, #f3dbdb);
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d40000 #f3dbdb;
+}
+
+.modal-titulo-confirmacion {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  color: #d40000;
+}
+
+.modal-cerrar-confirmacion {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  color: #d40000;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.modal-cerrar-confirmacion:hover {
+  color: #ff725e;
+}
+
+.orden-header-modal-confirmacion {
+  background-color: #F3F6EB;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  margin-top: 1.5rem;
+  justify-content: center;
+  text-align: center;
+  box-shadow: #454e5a 0px 0px 10px;
+}
+
+.orden-titulo-modal-confirmacion {
+  display: flex;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.orden-titulo-modal-confirmacion img{
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: #b8b3b3 solid 1px;
+}
+.accion{
+  margin-top: 10px;
+  font-weight: bold;
+}
+.accion-comprar{
+  font-weight: normal;
+  background-color: #b0ffa9;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+.accion-vender{
+  font-weight: normal;
+  background-color: #ffb0b0;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+.resumen-orden {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #f8a8a8;
+  border-radius: 10px;
+  box-shadow: #454e5a 0px 0px 10px;
+}
+.cantidadToral-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  margin-left: 10px;
+}
+.label-cantidadToral-resumen {
+  background-color: #B58182;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 150px;
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.totalAcciones-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  margin-left: 10px;
+}
+.label-totalAcciones-resumen {
+  background-color: #B58182;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 150px;
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.comision-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  margin-left: 10px;
+}
+.label-comision-resumen {
+  background-color: #B58182;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 150px;
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.importeFinal-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  margin-left: 10px;
+}
+.label-importeFinal-resumen {
+  background-color: #B58182;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 150px;
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.confirmar-modal-comprar{
+  width: 100%;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.confirmar-modal-comprar:hover {
+  background: #218838;
+}
+.confirmar-modal-vender {
+  width: 100%;
+  background: #d40000;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.confirmar-modal-vender:hover {
+  background: #b30000;
+}
