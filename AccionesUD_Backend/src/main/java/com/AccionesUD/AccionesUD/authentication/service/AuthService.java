@@ -1,4 +1,4 @@
-package com.AccionesUD.AccionesUD.usuario.service;
+package com.AccionesUD.AccionesUD.authentication.service;
 
 import java.util.Map;
 import java.util.Random;
@@ -16,7 +16,7 @@ import com.AccionesUD.AccionesUD.authentication.dto.RegisterRequest;
 import com.AccionesUD.AccionesUD.global.security.JwtService;
 import com.AccionesUD.AccionesUD.usuario.entity.Role;
 import com.AccionesUD.AccionesUD.usuario.entity.User;
-import com.AccionesUD.AccionesUD.authentication.repository.UserRepository;
+import com.AccionesUD.AccionesUD.usuario.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -92,8 +92,6 @@ public class AuthService {
         .id(request.getId())
         .phone(request.getPhone())
         .address(request.getAddress())
-        .otpEnabled(request.isOtpEnabled())
-        .dailyOrderLimit(request.getDailyOrderLimit()) 
         .role(Role.USER)
         .build();
 
