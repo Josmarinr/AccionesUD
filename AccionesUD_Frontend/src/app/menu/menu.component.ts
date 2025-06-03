@@ -147,4 +147,7 @@ export class MenuComponent {
       behavior: 'smooth',
     });
   }
+  mostrarContrasena: boolean = false;
+
+
 }
