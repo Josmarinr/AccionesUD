@@ -1,76 +1,101 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background: #fdfdfd;
   margin: 0;
 }
 
+
 .banner-superior {
-  background: linear-gradient(to right, #ffe0e0, #ffe8df);
-  color: #e6574f;
+  background: linear-gradient(to right, #f10909, #eb756f);
+  color: #ffffff;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 600;
-  padding: 0.1rem 2rem;
-  border-bottom: 2px solid #e6574f;
-  letter-spacing: 0.8px;
-  animation: aparecerBanner 0.8s ease-out;
-  text-shadow: 1px 1px 2px rgba(230, 87, 79, 0.2);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.6rem 2rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  animation: aparecerBanner 1s ease-out;
+  text-shadow: 2px 2px 4px rgba(230, 87, 79, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px 12px 0 0;
+  margin-right: 14px;
+  position: relative;
+  z-index: 1001;
 }
 
+@keyframes aparecerBanner {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 .navbar {
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.6rem 5vw;
+  padding: 0.3rem 5vw;
+  background: #f0b5b6;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: none;
   border-bottom: 1px solid rgba(230, 87, 79, 0.2);
-  background: rgba(245, 225, 225, 0.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  border-radius: 0 0 30px 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 0 0 20px 20px;
   font-family: 'Poppins', sans-serif;
   position: sticky;
   top: 0;
-  margin-right: 15px;
-  margin-left: 2px;
   z-index: 1000;
   transition: all 0.3s ease-in-out;
+  height: 78px;
+  overflow: hidden;
+  margin-right: 14px;
 }
 
-
-
-.logo-section {
-  display: flex;
-  align-items: center;
-}
-
-/* Nuevo: agrupa logo y menú */
 .logo-menu-group {
   display: flex;
   align-items: center;
-  gap: 2rem; /* Espacio entre logo y menú */
+  gap: 2rem;
+}
+
+.logo-section img {
+  height: 120px;
+  margin-top: -20px;
+  margin-bottom: -20px;
+  transition: transform 0.3s ease;
+}
+
+.logo-section img:hover {
+  transform: scale(1.05);
 }
 
 .menu {
-  font-family: 'Poppins', sans-serif;
   display: flex;
-  gap: 2rem;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  gap: 1.8rem;
 }
 
 .menu li a {
   text-decoration: none;
-  color: #222;
-  font-size: 1.3rem;
-  font-family: 'Poppins', sans-serif;
+  color: #000000;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s ease-in-out;
+  font-style: bold;
+}
+
+.menu li a:hover {
+  color: #f10909;
 }
 
 .actions {
@@ -78,31 +103,29 @@ body {
   gap: 1rem;
 }
 
-
-.premium-btn {
-  background: linear-gradient(to right, #ffecd2, #fcb69f);
-  color: #2a2a2a;
-  font-weight: 600;
-}
-
-.invertir-btn {
-  background: linear-gradient(to right, #e6574f, #ff8a65);
-  color: white;
-  font-weight: 600;
-}
-
+.premium-btn,
+.invertir-btn,
 .actions button {
-  font-family: 'Poppins', sans-serif;
-  padding: 0.6rem 1.8rem;
-  font-size: 1rem;
-  border-radius: 12px;
+  background: linear-gradient(to right, #eb1409, #ff8a65);
+    color: #ffffff;
+    font-weight: 600;
   border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.premium-btn:hover,
+.invertir-btn:hover,
+.actions button:hover {
+  background: #dd2626;
 }
 
 /* Animación para el fondo */
+
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -204,7 +227,7 @@ body {
   background: #fdfdfd;
   transition: all 0.25s ease;
   box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-  font-family: "Inter", Roboto, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-group input:focus {
@@ -362,7 +385,169 @@ img {
   text-decoration: underline;
 }
 
+.saludo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  color: #ce0606;
+  /* coral suave */
+  text-align: center;
+  margin-top: 0;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  animation: aparecerMensaje 1s ease-out forwards;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.inicio-sesion {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  color: #333333;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-weight: 900;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
 
 
 
+@keyframes aparecerMensaje {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
 
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 0.5rem 2.5rem;
+  box-sizing: border-box;
+}
+
+.icon-left {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  color: #555;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.icon-right {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  color: #555;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+
+.modal {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+
+.cerrar-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  color: #d11e1e;
+  line-height: 1;
+  padding: 0;
+}
+
+.fondo-estereograma {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(#888 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: moverPuntos 20s linear infinite;
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+@keyframes moverPuntos {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-50px, -50px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.modal {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 1rem;
+  z-index: 1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(60deg,
+      #f2dede,
+      #e6bcbc,
+      #d98880,
+      #e6bcbc,
+      #f2dede);
+  background-size: 600% 600%;
+  animation: bordeRojoSuave 15s linear infinite;
+  z-index: -1;
+  border-radius: inherit;
+  filter: blur(3px);
+  opacity: 0.8;
+}
+
+@keyframes bordeRojoSuave {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
