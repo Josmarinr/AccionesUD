@@ -1,0 +1,10 @@
+<app-menu></app-menu>
+<div class="lista-activos-container">
+  <app-activo *ngFor="let activo of activos$ | async"
+    [nombreActivo]="activo.name"
+    [precioCompra]="activo.buyPrice"
+    [precioVenta]="activo.sellPrice"
+    [pais]="activo.country"
+    [chartData]="activo.chartData">
+  </app-activo>
+</div>

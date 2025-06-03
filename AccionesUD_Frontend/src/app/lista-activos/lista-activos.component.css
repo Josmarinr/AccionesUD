@@ -1,0 +1,4 @@
+.lista-activos-container {
+  display: flex;
+  flex-direction: column;
+}

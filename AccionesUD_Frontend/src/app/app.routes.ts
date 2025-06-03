@@ -5,6 +5,7 @@ import { MenuComponent } from './menu/menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ActivoComponent } from './activo/activo.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ListaActivosComponent } from './lista-activos/lista-activos.component';
 
 export const routes: Routes = [
   { path: '', component: CuerpoPrincipalComponent },
@@ -16,8 +17,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'activo',
-    component: ActivoComponent
+    path: 'lista-activos',
+    component: ListaActivosComponent
   }
 ];
 // 
