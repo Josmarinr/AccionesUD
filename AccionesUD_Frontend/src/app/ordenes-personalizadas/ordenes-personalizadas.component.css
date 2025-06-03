@@ -117,7 +117,18 @@
   background: #e0dede;
   border-radius: 8px;
   padding: 0.4rem 1rem;
-  width: fit-content;
+  width: 100%;
+  max-width: 170px;
+}
+
+.cantidad{
+  width: 60px;
+  text-align: center;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
 }
 
 .orden-cantidad input {
@@ -140,7 +151,6 @@
 
 .orden-cantidad input:invalid {
   border: 1px solid red;
-  /* Puedes agregar otros estilos, como background-color o box-shadow */
   background-color: #ffe6e6;
   color: #d40000;
 }
@@ -192,4 +202,353 @@
   .orden-grafica img {
     max-width: 100%;
   }
+}
+
+
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: overlayFadeIn 0.4s forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { background: rgba(0,0,0,0); }
+  to   { background: rgba(0,0,0,0.5); }
+}
+
+.modal-contenido {
+  background: linear-gradient(45deg, #f8a8a8, #f3dbdb);
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d40000 #f3dbdb;
+}
+
+.modal-titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  color: #d40000;
+}
+.orden-header-modal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.orden-logo-modal {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.orden-titulo-modal {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.orden-subtitulo-modal {
+  font-size: 1rem;
+  color: #747474;
+  margin-top: -0.3rem;
+}
+
+.modal-cerrar{
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  color: #d40000;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.modal-cerrar:hover {
+  color: #ff725e;
+}
+
+.orden-cantidadprecios-modal{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  text-align: center;
+}
+
+.cantidad-modal {
+  display: grid;
+  justify-content: center;
+}
+
+.cantidad-modal input {
+  padding: 0px;
+  text-align: center;
+  border: solid 1px #B58182;
+  border-radius: 10px;
+  background: #B58182;
+  font-size: 1.2rem;
+  color: #000000;
+  width: 100px;
+  height: 30px;
+}
+
+.cantidad-modal input::-webkit-inner-spin-button,
+.cantidad-modal input::-webkit-outer-spin-button {
+  margin: 0;
+  cursor: pointer;
+  border: 1px solid;
+  opacity: 1 !important;
+}
+
+.cantidad-modal input:invalid {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+  color: #d40000;
+}
+
+.precio-modal {
+  display: grid;
+  justify-content: center;
+}
+
+.precio-modal p {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  border: solid 1px #B58182;
+  border-radius: 10px;
+  background: #B58182;
+  font-size: 1.2rem;
+  color: #000000;
+  width: 100px;
+  height: 30px;
+}
+
+.datos-modal{
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  text-align: center;
+}
+
+.datos-modal label {
+  display: grid;
+  font-weight: bold;
+  justify-content: center;
+  text-align: center;
+}
+.datos-modal p {
+  margin: 2px;
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #000000;
+  width: 100px;
+  height: 30px;
+  line-height: 1.2;
+}
+
+.tipo-orden-precioespecifico{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.tipo-orden-precioespecifico .tipo-orden{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #fff;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: #e6574f;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.precio-especifico {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.precio-especifico input{
+  padding: 0px;
+  text-align: center;
+  border: solid 1px #B58182;
+  border-radius: 10px;
+  background: #B58182;
+  font-size: 1.2rem;
+  color: #000000;
+  width: 100px;
+  height: 30px;
+}
+
+.precio-especifico input::-webkit-inner-spin-button,
+.precio-especifico input::-webkit-outer-spin-button {
+  margin: 0;
+  cursor: pointer;
+  border: 1px solid;
+  opacity: 1 !important;
+}
+
+.precio-especifico input:invalid {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+  color: #d40000;
+}
+
+.loss-take{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.stop-loss, .take-profit{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.stop-loss #stopLoss,
+.take-profit #takeProfit{
+  padding: 0px;
+  text-align: center;
+  border: solid 1px #B58182;
+  border-radius: 10px;
+  background: #B58182;
+  font-size: 1.2rem;
+  color: #000000;
+  width: 100px;
+  height: 30px;
+}
+.stop-loss #stopLoss::-webkit-inner-spin-button,
+.stop-loss #stopLoss::-webkit-outer-spin-button,
+.take-profit #takeProfit::-webkit-inner-spin-button,
+.take-profit #takeProfit::-webkit-outer-spin-button {
+  margin: 0;
+  cursor: pointer;
+  border: 1px solid;
+  opacity: 1 !important;
+}
+.stop-loss #stopLoss:invalid,
+.take-profit #takeProfit:invalid {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+  color: #d40000;
+}
+.totales-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+.total-estimado{
+  margin-bottom: 1rem;
+}
+.datototal{
+  text-align: center;
+  border-radius: 10px;
+  background: #B58182;
+  color: #000000;
+}
+.datosaldo {
+  text-align: center;
+  border-radius: 10px;
+  background: #B58182;
+  color: #000000;
+}
+
+.botones-modal{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.botones-modal .cancelar-modal {
+  background: #d40000;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.botones-modal .cancelar-modal:hover {
+  background: #b30000;
+}
+.botones-modal .confirmar-modal {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.botones-modal .confirmar-modal:hover {
+  background: #218838;
 }
