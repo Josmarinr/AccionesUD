@@ -12,13 +12,26 @@ export interface Order {
   ventaPrecio: number;
   cantidad: number;
   moneda: string;
+
+  spread: number;
+  spreadpips: number;
+  comision: number;
+  comisionporsentaje: number;
+  valorPip: number;
+  swapDiarioCompra: string;
+  swapDiarioVenta: string;
+  tipoOrden: string;
+  stopLoss: number;
+  takeProfit: number;
+  totalEstimado: number;
+  saldoDisponible: number;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = ''; // Cambia a la URL de tu API cuando esté disponible
+  private apiUrl = ''; // URL de tu API
 
   constructor(private http: HttpClient) { }
 
@@ -34,7 +47,19 @@ export class OrderService {
         compraPrecio: 1816,
         ventaPrecio: 1798,
         cantidad: 0.5,
-        moneda: 'COP'
+        moneda: 'COP',
+        spread: 32.982,
+        spreadpips: 0.02,
+        comision: 0,
+        comisionporsentaje: 0.00,
+        valorPip: 91.521,
+        swapDiarioCompra: '-15.215,00',
+        swapDiarioVenta: '-21.452,00',
+        tipoOrden: 'market',
+        stopLoss: 0.1,
+        takeProfit: 0,
+        totalEstimado: 1816,
+        saldoDisponible: 412.456
       },
       {
         id: 2,
@@ -45,9 +70,23 @@ export class OrderService {
         compraPrecio: 350.23,
         ventaPrecio: 342.82,
         cantidad: 0.3,
-        moneda: 'USD'
+        moneda: 'USD',
+        spread: 1.5,
+        spreadpips: 0.1,
+        comision: 0.5,
+        comisionporsentaje: 0.15,
+        valorPip: 0.8,
+        swapDiarioCompra: '-0.25',
+        swapDiarioVenta: '-0.30',
+        tipoOrden: 'market',
+        stopLoss: 0,
+        takeProfit: 0,
+        totalEstimado: 350.23,
+        saldoDisponible: 1000
       }
     ];
     return of(testOrders);
+    // Cuando esté disponible el backend, utiliza:
+    // return this.http.get<Order[]>(this.apiUrl);
   }
 }
