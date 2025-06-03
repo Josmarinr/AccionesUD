@@ -54,7 +54,6 @@ export class MenuComponent {
 
   /*DESACTIVACION TEMPORAL DEL MÉTODO DE AUTENTICACION PARA FACILITAR LAS PRUEBAS*/
 
-  /*
   onSubmit() {
     if (!this.showOtpField) {
       const loginPayload = {
@@ -89,6 +88,10 @@ export class MenuComponent {
         .subscribe({
           next: (res) => {
             localStorage.setItem('jwt', res.token);
+            console.log(
+              'Token guardado en localStorage:',
+              localStorage.getItem('jwt')
+            );
             this.mensaje = 'Inicio de sesión exitoso.';
             this.cerrarModal();
             this.router.navigate(['/dashboard']);
@@ -101,8 +104,6 @@ export class MenuComponent {
     }
   }
 
-
-
   get usuarioAutenticado(): boolean {
     const token = localStorage.getItem('jwt');
     if (!token) return false;
@@ -111,7 +112,7 @@ export class MenuComponent {
     return Date.now() < payload.exp * 1000;
   }
 
-  */
+  /*
 
   onSubmit() {
     // Simulación de login sin validación
@@ -124,7 +125,7 @@ export class MenuComponent {
 
   get usuarioAutenticado(): boolean {
     return !!localStorage.getItem('jwt');
-  }
+  }*/
 
   volverAlInicio() {
     this.cerrarModal();
@@ -136,11 +137,17 @@ export class MenuComponent {
     this.router.navigate(['/']);
   }
 
+  verPerfil() {
+    this.router.navigate(['/miperfil']);
+  }
 
   scrollToBottom(duration: number) {
     window.scrollTo({
       top: document.body.scrollHeight,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
+  mostrarContrasena: boolean = false;
+
+
 }
