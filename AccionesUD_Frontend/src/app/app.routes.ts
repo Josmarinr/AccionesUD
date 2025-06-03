@@ -7,8 +7,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { OrdenesPersonalizadasComponent } from './ordenes-personalizadas/ordenes-personalizadas.component';
 
-
-
 export const routes: Routes = [
   { path: '', component: CuerpoPrincipalComponent },
   { path: 'registro', component: VistaRegistroComponent },
@@ -20,7 +18,6 @@ export const routes: Routes = [
   },
   { path: 'miperfil', component: MiPerfilComponent, canActivate: [AuthGuard] },
 ];
-
 
 /*
 export const routes: Routes = [
