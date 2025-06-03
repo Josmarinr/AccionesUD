@@ -18,9 +18,10 @@ export class OrdenesPersonalizadasComponent implements OnInit {
   ordenes: Order[] = [];
 
   mostrarModal: boolean = false; // Controla la visibilidad del modal
+  mostrarModalConfirmacion: boolean = false;
   ordenSeleccionada: Order | null = null; // Almacena la orden seleccionada
   modalTitulo: string = '';
-  
+
 
   // Estas propiedades ya no se inicializan con valores fijos, se asignarán desde la orden:
   cantidad!: number;
@@ -73,9 +74,35 @@ export class OrdenesPersonalizadasComponent implements OnInit {
     this.mostrarModal = true;
   }
 
+  abrirModalConfirmacion(orden: Order, operacion: string): void {
+    this.ordenSeleccionada = orden;
+    // Asignar datos recibidos del backend a las propiedades locales
+    this.cantidad = orden.cantidad;
+    this.precio = orden.compraPrecio;
+    this.spread = orden.spread;
+    this.spreadpips = orden.spreadpips;
+    this.comision = orden.comision;
+    this.comisionporsentaje = orden.comisionporsentaje;
+    this.valorPip = orden.valorPip;
+    this.swapDiarioCompra = orden.swapDiarioCompra;
+    this.swapDiarioVenta = orden.swapDiarioVenta;
+    this.tipoOrden = orden.tipoOrden;
+    this.stopLoss = orden.stopLoss;
+    this.takeProfit = orden.takeProfit;
+    this.totalEstimado = orden.totalEstimado;
+    this.saldoDisponible = orden.saldoDisponible;
+
+    this.modalTitulo = operacion;
+    this.mostrarModalConfirmacion = true;
+  }
+
   cerrarModal(): void {
     this.mostrarModal = false; // Oculta el modal
     this.ordenSeleccionada = null; // Limpia la orden seleccionada
+  }
+
+  cerrarModalConfirmacion(): void {
+    this.mostrarModalConfirmacion = false; // Oculta el modal
   }
 
   enviarOrden(): void {
@@ -87,5 +114,6 @@ export class OrdenesPersonalizadasComponent implements OnInit {
       takeProfit: this.takeProfit
     });
     this.cerrarModal();
+    this.cerrarModalConfirmacion();
   }
 }
