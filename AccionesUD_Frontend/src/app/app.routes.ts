@@ -7,21 +7,19 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { OrdenesPersonalizadasComponent } from './ordenes-personalizadas/ordenes-personalizadas.component';
 
-
-/*
 export const routes: Routes = [
   { path: '', component: CuerpoPrincipalComponent },
   { path: 'registro', component: VistaRegistroComponent },
-  { path: '', component: MenuComponent },
+  //{ path: '', component: MenuComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
+  { path: 'miperfil', component: MiPerfilComponent, canActivate: [AuthGuard] },
 ];
-//
-*/
 
+/*
 export const routes: Routes = [
   { path: '', component: CuerpoPrincipalComponent },
   { path: 'registro', component: VistaRegistroComponent },
@@ -30,3 +28,4 @@ export const routes: Routes = [
   //{ path: 'dashboard', component: DashboardComponent }, // Sin guard para pruebas
   { path: 'ordenes', component: OrdenesPersonalizadasComponent},
 ];
+*/
