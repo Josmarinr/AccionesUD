@@ -171,12 +171,23 @@ recuperarContrasena(): void {
     return;
   }
 
-  // Aquí debes llamar tu servicio backend para enviar el enlace.
-  console.log('Recuperación solicitada para:', this.correoRecuperacion);
+  const payload = {
+    email: this.correoRecuperacion
+  };
 
-  alert('Si el correo está registrado, recibirás un enlace para restablecer tu contraseña.');
-  this.cerrarModalRecuperacion();
+  this.http.post('http://localhost:8080/auth/password/request', payload)
+    .subscribe({
+      next: () => {
+        alert('Correo de recuperación enviado. Revisa tu bandeja de entrada.');
+        this.cerrarModalRecuperacion();
+      },
+      error: (error) => {
+        console.error('Error al solicitar recuperación:', error);
+        alert('Hubo un problema al procesar la solicitud.');
+      }
+    });
 }
+
 
 
 }

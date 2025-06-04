@@ -39,7 +39,7 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="formulario-contenedor">
       <!-- Campo de correo con ícono -->
-      <div class="form-group">
+      <div class="form-group" *ngIf="!showOtpField">
         <label for="usuario">Correo electrónico</label>
         <div class="input-wrapper">
           <i class="fa-solid fa-envelope icon-left"></i>
@@ -59,7 +59,7 @@
       </div>
 
       <!-- Campo de contraseña con íconos -->
-      <div class="form-group">
+      <div class="form-group" *ngIf="!showOtpField">
         <label for="contrasena">Contraseña</label>
         <div class="input-wrapper">
           <i class="fa-solid fa-lock icon-left"></i>
@@ -86,8 +86,8 @@
       </div>
 
       <!-- Campo OTP -->
-      <div *ngIf="showOtpField" class="form-group">
-        <label for="otp">Código OTP</label>
+      <div *ngIf="showOtpField" class="código-verificacion">
+        <label for="otp">Código de verificación</label>
         <input
           id="otp"
           type="text"
