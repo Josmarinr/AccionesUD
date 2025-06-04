@@ -171,7 +171,7 @@ body {
   margin-bottom: -3rem;
   height: 550px;
 
-  
+
 }
 
 
@@ -259,6 +259,12 @@ body {
   display: none !important;
 }
 
+.código-verificacion{
+  margin-top: -20px;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
 .form-group {
   margin-top: -20px;
   margin-bottom: 1.5rem;
@@ -312,7 +318,7 @@ body {
 }
 
 .entrar-btn {
-  margin-top: -15px;
+  margin-top: 15px;
   width: 100%;
   max-width: 245px;
   padding: 0.7rem;
