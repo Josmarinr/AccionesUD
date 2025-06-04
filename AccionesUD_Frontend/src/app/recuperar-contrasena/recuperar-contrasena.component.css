@@ -1,0 +1,103 @@
+.contenedor-recuperarcontrasena {
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.nuevaContrasena {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #004aad;
+}
+
+.form-group {
+  margin-bottom: 20px;
+
+}
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon i {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  color: #888;
+}
+
+input[type="password"] {
+  width: 370px;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+  margin-top: 10px;
+}
+
+input[type="password"]:focus {
+  border-color: #004aad;
+  outline: none;
+}
+
+.mensaje-error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+.alerta-error {
+  background-color: #ffe0e0;
+  color: #c70000;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.alerta-exito {
+  background-color: #e0ffe5;
+  color: #007f30;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
+.btn-principal:disabled {
+  background-color: #b8c6e3;
+  cursor: not-allowed;
+}
+
+
+.btn-principal {
+  width: 420px;
+  padding: 12px;
+  background: linear-gradient(to right, #eb1409, #ff8a65);
+  font-weight: 600;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.btn-principal:hover {
+  background: #dd2626;
+}
