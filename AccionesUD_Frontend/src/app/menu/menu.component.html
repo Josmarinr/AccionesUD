@@ -5,7 +5,8 @@
 
 <!-- Barra de navegación -->
 <nav class="navbar">
-  <div class="logo-menu-group"><!-- Sección del logo -->
+  <div class="logo-menu-group">
+    <!-- Sección del logo -->
     <div class="logo-section">
       <a href="/">
         <img src="/logo.svg" alt="Logo Acciones UD" class="logo" />
@@ -13,12 +14,8 @@
     </div>
     <ul class="menu">
       <li><a href="#">Invierte</a></li>
-      <li>
-        <a href="javascript:void(0)" (click)="scrollToBottom(3000)">Conócenos</a>
-      </li>
-      <li>
-        <a href="javascript:void(0)" (click)="scrollToBottom(3000)">Políticas</a>
-      </li>
+      <li><a href="javascript:void(0)" (click)="scrollToBottom(3000)">Conócenos</a></li>
+      <li><a href="javascript:void(0)" (click)="scrollToBottom(3000)">Políticas</a></li>
     </ul>
   </div>
   <div class="actions">
@@ -29,8 +26,7 @@
   </div>
 </nav>
 
-
-
+<!-- Modal de inicio de sesión -->
 <div class="modal-overlay" [hidden]="!mostrarModal">
   <div class="modal" [class.cerrar-anim]="animandoCerrar">
 
@@ -40,56 +36,56 @@
     <img src="/logo.svg" alt="Logo Acciones UD" class="logo" />
     <h2 class="saludo">¡Bienvenido a Acciones UD!</h2>
     <h2 class="inicio-sesion">Iniciar sesión</h2>
+
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="formulario-contenedor">
+      <!-- Campo de correo con ícono -->
+      <div class="form-group">
+        <label for="usuario">Correo electrónico</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-envelope icon-left"></i>
+          <input
+            id="usuario"
+            type="email"
+            formControlName="username"
+            class="custom-input"
+            placeholder="nombre@correo.com"
+            required
+          />
+        </div>
+        <div *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)" class="error">
+          <div *ngIf="loginForm.get('username')?.errors?.['required']" style="color: red;">El correo es obligatorio.</div>
+          <div *ngIf="loginForm.get('username')?.errors?.['email']" style="color: red;">Ingrese un correo válido.</div>
+        </div>
+      </div>
 
-<!-- Campo de correo con ícono -->
-<div class="form-group">
-  <label for="usuario">Correo electrónico</label>
-  <div class="input-wrapper">
-    <i class="fa-solid fa-envelope icon-left"></i>
-    <input
-      id="usuario"
-      type="email"
-      formControlName="username"
-      class="custom-input"
-      placeholder="nombre@correo.com"
-      required
-    />
-  </div>
-  <div *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)" class="error">
-    <div *ngIf="loginForm.get('username')?.errors?.['required']" style="color: red;">El correo es obligatorio.</div>
-    <div *ngIf="loginForm.get('username')?.errors?.['email']" style="color: red;">Ingrese un correo válido.</div>
-  </div>
-</div>
+      <!-- Campo de contraseña con íconos -->
+      <div class="form-group">
+        <label for="contrasena">Contraseña</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock icon-left"></i>
+          <input
+            id="contrasena"
+            [type]="mostrarContrasena ? 'text' : 'password'"
+            formControlName="password"
+            class="custom-input"
+            placeholder="Introduce tu contraseña"
+            required
+          />
+          <i
+            class="fa-solid icon-right"
+            [ngClass]="mostrarContrasena ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="mostrarContrasena = !mostrarContrasena"
+          ></i>
+        </div>
+        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error">
+          <div *ngIf="loginForm.get('password')?.errors?.['required']" style="color: red;">La contraseña es requerida.</div>
+          <div *ngIf="loginForm.get('password')?.errors?.['incorrect']" style="color: red;">
+            La contraseña o el correo son incorrectos.
+          </div>
+        </div>
+      </div>
 
-<!-- Campo de contraseña con íconos -->
-<div class="form-group">
-  <label for="contrasena">Contraseña</label>
-  <div class="input-wrapper">
-    <i class="fa-solid fa-lock icon-left"></i>
-    <input
-      id="contrasena"
-      [type]="mostrarContrasena ? 'text' : 'password'"
-      formControlName="password"
-      class="custom-input"
-      placeholder="Introduce tu contraseña"
-      required
-    />
-    <i
-      class="fa-solid icon-right"
-      [ngClass]="mostrarContrasena ? 'fa-eye-slash' : 'fa-eye'"
-      (click)="mostrarContrasena = !mostrarContrasena"
-    ></i>
-  </div>
-  <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error">
-    <div *ngIf="loginForm.get('password')?.errors?.['required']" style="color: red;">La contraseña es requerida.</div>
-    <div *ngIf="loginForm.get('password')?.errors?.['incorrect']" style="color: red;">
-      La contraseña o el correo son incorrectos.
-    </div>
-  </div>
-</div>
-
-
+      <!-- Campo OTP -->
       <div *ngIf="showOtpField" class="form-group">
         <label for="otp">Código OTP</label>
         <input
@@ -102,6 +98,7 @@
         />
       </div>
 
+      <!-- Mensaje de error -->
       <div *ngIf="mensaje" class="mensaje-error">
         {{ mensaje }}
       </div>
@@ -114,7 +111,37 @@
     <div class="registro-link">
       ¿No tienes cuenta?
       <a href="/registro">Regístrate</a> |
-      <a (click)="volverAlInicio()" style="cursor: pointer;">Olvidé mi contraseña</a>
+      <a (click)="abrirModalRecuperacion()" style="cursor: pointer;">Olvidé mi contraseña</a>
     </div>
+  </div>
+</div>
+
+<!-- Modal de recuperación de contraseña -->
+<div class="modal-overlay" [hidden]="!mostrarModalRecuperacion">
+  <div class="modal modal-recuperacion" [class.cerrar-anim]="animandoCerrar">
+    <button class="cerrar-btn" (click)="cerrarModalRecuperacion()" aria-label="Cerrar modal">&times;</button>
+    <img src="/logo.svg" alt="Logo Acciones UD" class="logo" />
+    <h2 class="inicio-sesion">Recuperar contraseña</h2>
+
+    <form (ngSubmit)="recuperarContrasena()" #recuperarForm="ngForm" class="formulario-contenedor">
+
+      <div class="form-group">
+        <label for="correoRecuperacion">Correo electrónico</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-envelope icon-left"></i>
+          <input
+            id="correoRecuperacion"
+            type="email"
+            name="correoRecuperacion"
+            class="custom-input"
+            placeholder="nombre@correo.com"
+            [(ngModel)]="correoRecuperacion"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="entrar-btn">Enviar enlace</button>
+    </form>
   </div>
 </div>

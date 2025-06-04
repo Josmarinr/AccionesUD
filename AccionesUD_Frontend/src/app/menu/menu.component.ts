@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  FormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +15,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule],
 })
 export class MenuComponent {
   mostrarModal = false;
@@ -148,6 +149,34 @@ export class MenuComponent {
     });
   }
   mostrarContrasena: boolean = false;
+
+
+  mostrarModalRecuperacion: boolean = false;
+
+abrirModalRecuperacion(): void {
+  this.mostrarModal = false; // Oculta el modal de login
+  this.mostrarModalRecuperacion = true; // Muestra el de recuperación
+}
+
+cerrarModalRecuperacion(): void {
+  this.mostrarModalRecuperacion = false;
+}
+
+
+correoRecuperacion: string = '';
+
+recuperarContrasena(): void {
+  if (!this.correoRecuperacion) {
+    alert('Por favor ingrese su correo.');
+    return;
+  }
+
+  // Aquí debes llamar tu servicio backend para enviar el enlace.
+  console.log('Recuperación solicitada para:', this.correoRecuperacion);
+
+  alert('Si el correo está registrado, recibirás un enlace para restablecer tu contraseña.');
+  this.cerrarModalRecuperacion();
+}
 
 
 }

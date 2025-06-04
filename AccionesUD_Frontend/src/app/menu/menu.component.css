@@ -144,19 +144,34 @@ body {
 
 /* Animación para el modal */
 .modal {
+  width: 400px;
   background: linear-gradient(135deg, #f8a8a8, #ffececcc);
   border: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 2rem;
-  border-radius: 18px;
   min-width: 300px;
   text-align: center;
   transform: translateY(-60px);
   opacity: 0;
   animation: modalSlideDown 0.5s forwards;
+
   position: relative;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 1rem;
+  z-index: 1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  box-sizing: border-box;
+  margin-bottom: -3rem;
+  height: 550px;
+
+  
 }
 
 
@@ -168,6 +183,41 @@ body {
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+.modal::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(60deg,
+      #f2dede,
+      #e6bcbc,
+      #d98880,
+      #e6bcbc,
+      #f2dede);
+  background-size: 600% 600%;
+  animation: bordeRojoSuave 5s linear infinite;
+  z-index: -1;
+  border-radius: inherit;
+  filter: blur(3px);
+  opacity: 0.8;
+}
+
+@keyframes bordeRojoSuave {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
   }
 }
 
@@ -186,8 +236,12 @@ body {
   }
 }
 
+.logo {
+  margin-top: -2rem;
+}
+
 .cerrar-btn {
-  position: absolute;
+  position: relative;
   top: 12px;
   right: 16px;
   background: transparent;
@@ -198,6 +252,7 @@ body {
   cursor: pointer;
   line-height: 1;
   padding: 0;
+
 }
 
 [hidden] {
@@ -205,17 +260,20 @@ body {
 }
 
 .form-group {
+  margin-top: -20px;
   margin-bottom: 1.5rem;
   text-align: left;
+
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+  margin-top: -40px;
+  margin-bottom: 0.4rem;
+  font-weight: 300;
   font-size: 0.95rem;
   color: #444;
-  letter-spacing: 0.4px;
+  font-family: 'Poppins', sans-serif;
+  transition: color 0.3s ease;
 }
 
 .form-group input {
@@ -226,8 +284,9 @@ body {
   font-size: 1rem;
   background: #fdfdfd;
   transition: all 0.25s ease;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
   font-family: 'Poppins', sans-serif;
+  font-size: small;
 }
 
 .form-group input:focus {
@@ -253,7 +312,9 @@ body {
 }
 
 .entrar-btn {
+  margin-top: -15px;
   width: 100%;
+  max-width: 245px;
   padding: 0.7rem;
   background: #E6574F59;
   color: #2A3448;
@@ -271,11 +332,6 @@ body {
 .entrar-btn:hover {
   background: #E6574F80;
   transform: scale(1.02);
-}
-
-.registro-link {
-  margin-top: 0.5rem;
-  font-size: 1rem;
 }
 
 .registro-link a {
@@ -307,17 +363,6 @@ img {
 }
 
 
-.form-group {
-  margin-bottom: 1.2rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #444;
-}
 
 /* Contenedor del formulario centrado */
 .formulario-contenedor {
@@ -371,7 +416,7 @@ img {
 .registro-link {
   text-align: center;
   font-size: 0.95rem;
-  margin-top: 1.5rem;
+  margin-top: -2.5rem;
   color: #666;
 }
 
@@ -386,12 +431,12 @@ img {
 }
 
 .saludo {
+  margin-top: -25px;
   font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   color: #ce0606;
   /* coral suave */
   text-align: center;
-  margin-top: 0;
   font-weight: 600;
   letter-spacing: 0.03em;
   animation: aparecerMensaje 1s ease-out forwards;
@@ -399,16 +444,64 @@ img {
 }
 
 .inicio-sesion {
+  margin-top: -25px;
   font-family: 'Poppins', sans-serif;
   font-size: 1.2rem;
   color: #333333;
   text-align: center;
-  margin-top: 0.5rem;
   font-weight: 900;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+.modal-recuperacion {
+  .inicio-sesion{
+    margin-top: 0px;
+  }
+  width: 90%;
+  max-width: 380px;
+  height: auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fef9f9, #fff5f5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 204, 204, 0.4);
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: modalSlideDown 0.5s forwards;
+}
+.modal-recuperacion .logo {
+  width: 170px;
+  margin-bottom: 1rem;
+}
 
+.modal-recuperacion .inicio-sesion {
+  color: #ce0606;
+  font-size: 1.6rem;
+}
+.modal-recuperacion .form-group {
+  width: 100%;
+  margin-top: -2.5rem;
+}
+
+
+.modal-recuperacion .custom-input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-recuperacion .custom-input:focus {
+  border-color: #e6574f;
+  box-shadow: 0 0 0 3px rgba(230, 87, 79, 0.2);
+  outline: none;
+}
 
 @keyframes aparecerMensaje {
   0% {
@@ -451,16 +544,6 @@ img {
   font-size: 1rem;
   cursor: pointer;
 }
-
-
-
-.modal {
-  position: relative;
-  overflow: hidden;
-  padding: 2rem;
-  box-sizing: border-box;
-}
-
 
 .cerrar-btn {
   position: absolute;
@@ -505,49 +588,3 @@ img {
   }
 }
 
-.modal {
-  position: relative;
-  overflow: hidden;
-  padding: 2rem;
-  box-sizing: border-box;
-  background-color: #fff;
-  border-radius: 1rem;
-  z-index: 1;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.modal::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(60deg,
-      #f2dede,
-      #e6bcbc,
-      #d98880,
-      #e6bcbc,
-      #f2dede);
-  background-size: 600% 600%;
-  animation: bordeRojoSuave 15s linear infinite;
-  z-index: -1;
-  border-radius: inherit;
-  filter: blur(3px);
-  opacity: 0.8;
-}
-
-@keyframes bordeRojoSuave {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
