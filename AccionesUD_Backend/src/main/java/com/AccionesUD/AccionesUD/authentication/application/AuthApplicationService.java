@@ -22,18 +22,15 @@ public class AuthApplicationService {
     private final OtpService otpService;
     private final UserRegistrationService registrationService;
 
-    public Map<String, String> login(LoginRequest request) {
-    loginService.login(request);
-        return Map.of("message", "OTP sent to your email");
+    public Object login(LoginRequest request) {
+        return loginService.login(request); // Devuelve el resultado directamente
     }
 
     public AuthResponse verifyOtp(OtpRequest request) {
-    return otpService.verifyOtp(request);
+        return otpService.verifyOtp(request);
     }
 
     public AuthResponse register(RegisterRequest request) {
-    return registrationService.register(request);
-    
-}
- 
+        return registrationService.register(request);
+    }
 }
