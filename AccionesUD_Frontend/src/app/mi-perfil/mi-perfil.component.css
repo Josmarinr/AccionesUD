@@ -202,3 +202,36 @@ button[type="submit"]:hover {
   font-weight: bold;
   margin-top: 0px;
 }
+
+
+.email-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.email-row input {
+  flex: 1;
+  padding: 6px 10px;
+  margin-right: 8px;
+}
+
+.btn-add,
+.btn-remove {
+  background-color: #f72a2a;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-remove {
+  background-color: #dc3545;
+}
+
+.btn-add:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}

@@ -55,55 +55,56 @@ export class MenuComponent {
 
   /*DESACTIVACION TEMPORAL DEL MÉTODO DE AUTENTICACION PARA FACILITAR LAS PRUEBAS*/
 
-  onSubmit() {
-    if (!this.showOtpField) {
-      const loginPayload = {
-        username: this.loginForm.value.username,
-        password: this.loginForm.value.password,
-      };
+ onSubmit() {
+  if (!this.showOtpField) {
+    const loginPayload = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password,
+    };
 
-      this.http
-        .post('http://localhost:8080/auth/login', loginPayload)
-        .subscribe({
-          next: () => {
-            this.usernameTemp = loginPayload.username;
-            this.showOtpField = true;
-            this.mensaje = 'Se envió un código OTP a tu correo.';
-          },
-          error: (err) => {
-            console.error(err);
-            this.mensaje = 'Usuario o contraseña incorrectos.';
-          },
-        });
-    } else {
-      const otpPayload = {
-        username: this.usernameTemp,
-        otp: this.loginForm.value.otp,
-      };
+    this.http.post<any>('http://localhost:8080/auth/login', loginPayload).subscribe({
+      next: (res) => {
+        if (res.token) {
+          // Usuario sin OTP, login completo
+          localStorage.setItem('jwt', res.token);
+          this.mensaje = 'Inicio de sesión exitoso.';
+          this.cerrarModal();
+          this.router.navigate(['/dashboard']);
+        } else if (res.message === 'OTP sent to your email') {
+          // Usuario con OTP
+          this.usernameTemp = loginPayload.username;
+          this.showOtpField = true;
+          this.mensaje = 'Se envió un código OTP a tu correo.';
+        } else {
+          this.mensaje = 'Respuesta inesperada del servidor.';
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.mensaje = 'Usuario o contraseña incorrectos.';
+      },
+    });
+  } else {
+    const otpPayload = {
+      username: this.usernameTemp,
+      otp: this.loginForm.value.otp,
+    };
 
-      this.http
-        .post<{ token: string }>(
-          'http://localhost:8080/auth/verify-otp',
-          otpPayload
-        )
-        .subscribe({
-          next: (res) => {
-            localStorage.setItem('jwt', res.token);
-            console.log(
-              'Token guardado en localStorage:',
-              localStorage.getItem('jwt')
-            );
-            this.mensaje = 'Inicio de sesión exitoso.';
-            this.cerrarModal();
-            this.router.navigate(['/dashboard']);
-          },
-          error: (err) => {
-            console.error(err);
-            this.mensaje = 'Código OTP inválido o expirado.';
-          },
-        });
-    }
+    this.http.post<{ token: string }>('http://localhost:8080/auth/verify-otp', otpPayload).subscribe({
+      next: (res) => {
+        localStorage.setItem('jwt', res.token);
+        this.mensaje = 'Inicio de sesión exitoso.';
+        this.cerrarModal();
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.error(err);
+        this.mensaje = 'Código OTP inválido o expirado.';
+      },
+    });
   }
+}
+
 
   get usuarioAutenticado(): boolean {
     const token = localStorage.getItem('jwt');
@@ -187,7 +188,4 @@ recuperarContrasena(): void {
       }
     });
 }
-
-
-
 }

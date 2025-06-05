@@ -4,6 +4,7 @@ import {
   FormGroup,
   Validators,
   ReactiveFormsModule,
+  FormArray,
 } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -12,13 +13,14 @@ import {
   UserProfileService,
   UpdateUserProfileRequest,
 } from '../servicio/gestionusuario/userProfileService';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
   styleUrls: ['./mi-perfil.component.css'],
   standalone: true,
-  imports: [MenuComponent, ReactiveFormsModule, HttpClientModule],
+  imports: [MenuComponent, ReactiveFormsModule, HttpClientModule, CommonModule],
 })
 export class MiPerfilComponent implements OnInit {
   perfilForm!: FormGroup;
@@ -34,14 +36,19 @@ export class MiPerfilComponent implements OnInit {
     this.perfilForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      id: ['', Validators.required],
+      id: [{ value: '', disabled: true }],
       phone: ['', Validators.required],
-      username: ['', [Validators.required, Validators.email]],
+      username: [{ value: '', disabled: true }],
       address: ['', Validators.required],
       otpEnabled: [false],
       dailyOrderLimit: [1],
+      emails: this.fb.array([]),
+
+
     });
 
+    this.addEmail(); 
+    
     // Cargar datos reales del backend
     this.userProfileService.getMyProfile().subscribe({
       next: (data: UpdateUserProfileRequest) => {
@@ -64,7 +71,7 @@ export class MiPerfilComponent implements OnInit {
 
   onSubmit(): void {
     if (this.perfilForm.valid) {
-      const updatedProfile: UpdateUserProfileRequest = this.perfilForm.value;
+      const updatedProfile: UpdateUserProfileRequest = this.perfilForm.getRawValue();
 
       this.userProfileService.updateUserProfile(updatedProfile).subscribe({
         next: (res) => {
@@ -85,4 +92,20 @@ export class MiPerfilComponent implements OnInit {
   cancelarRegistro(): void {
     this.router.navigate(['/']);
   }
+
+get emails(): FormArray {
+  return this.perfilForm.get('emails') as FormArray;
+}
+
+addEmail(): void {
+  if (this.emails.length < 2) {
+    this.emails.push(this.fb.group({ value: [''] }));
+  }
+}
+
+removeEmail(index: number): void {
+  this.emails.removeAt(index);
+}
+
+
 }
