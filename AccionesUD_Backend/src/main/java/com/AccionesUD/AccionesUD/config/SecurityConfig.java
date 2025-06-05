@@ -9,7 +9,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.AccionesUD.AccionesUD.global.security.JwtAuthenticationFilter;
+import com.AccionesUD.AccionesUD.utilities.security.JwtAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +25,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
         return http
+            .cors(cors -> {})
             .csrf(csrf -> 
                 csrf
                 .disable())
