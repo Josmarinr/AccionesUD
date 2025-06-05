@@ -23,7 +23,7 @@ private final AuthApplicationService authApplicationService;
 
 // Paso 1: autentica y envía OTP al correo
 @PostMapping("login")
-public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
+public ResponseEntity<Object> login(@RequestBody LoginRequest request) {
 return ResponseEntity.ok(authApplicationService.login(request));
 }
 

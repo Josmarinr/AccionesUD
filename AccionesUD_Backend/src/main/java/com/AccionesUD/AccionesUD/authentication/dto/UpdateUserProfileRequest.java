@@ -7,17 +7,15 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-
-public class RegisterRequest {
-    Double id; //Cedula de identidad o pasaporte
-    private String username;
-    private String password;
+@AllArgsConstructor
+public class UpdateUserProfileRequest {
+    private Double id;
     private String firstname;
     private String lastname;
     private Double phone;
+    private String username;
     private String address;
     private boolean otpEnabled;
-    private int dailyOrderLimit;
+    private Integer dailyOrderLimit;
 }

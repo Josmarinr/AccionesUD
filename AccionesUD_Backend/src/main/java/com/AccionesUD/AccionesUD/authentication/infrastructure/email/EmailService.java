@@ -18,7 +18,7 @@ public class EmailService {
 
     public void sendOtpEmail(String to, String otp) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail); // ✅ remitente dinámico
+        message.setFrom(fromEmail); 
         message.setTo(to);
         message.setSubject("Tu código OTP");
         message.setText("Tu código de verificación es: " + otp);
@@ -27,7 +27,7 @@ public class EmailService {
 
     public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail); // ✅ remitente dinámico
+        message.setFrom(fromEmail); 
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
