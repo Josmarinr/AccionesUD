@@ -34,22 +34,52 @@
       </div>
 
       <div class="form-field">
+        <label>Correos adicionales</label>
+        <div formArrayName="emails">
+          <ng-container *ngFor="let email of emails.controls; let i = index">
+            <div [formGroupName]="i" class="email-row">
+              <input type="email" formControlName="value" placeholder="Correo adicional" />
+              <button type="button" class="btn-remove" (click)="removeEmail(i)">−</button>
+            </div>
+          </ng-container>
+
+          <button 
+            type="button" 
+            class="btn-add" 
+            (click)="addEmail()" 
+            [disabled]="emails.length >= 2">
+            + Añadir correo
+          </button>
+        </div>
+      </div>
+
+
+
+
+      <div class="form-field">
         <label for="address">Dirección</label>
         <textarea id="address" formControlName="address" placeholder="Ej. Calle 123 #45-67, Bogotá"></textarea>
       </div>
 
+      <!-- otpEnabled -->
       <div class="row">
         <label for="otpToggle">Activar OTP</label>
         <label class="switch">
-            <input type="checkbox" id="otpToggle"/>
-            <span class="slider"></span>
+          <input type="checkbox" id="otpToggle" formControlName="otpEnabled" />
+          <span class="slider"></span>
         </label>
       </div>
 
+      <!-- dailyOrderLimit -->
       <div class="form-field">
         <label for="dailyOrderLimit">Límite de órdenes diaria</label>
         <div class="number-input">
-        <input type="number" id="dailyOrderLimit" min="1" value="1" />
+          <input
+            type="number"
+            id="dailyOrderLimit"
+            formControlName="dailyOrderLimit"
+            min="1"
+          />
         </div>
       </div>
 
