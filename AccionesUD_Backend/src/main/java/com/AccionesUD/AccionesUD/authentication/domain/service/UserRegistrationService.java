@@ -38,6 +38,8 @@ public class UserRegistrationService {
             .phone(request.getPhone())
             .address(request.getAddress())
             .role(Role.USER)
+            .dailyOrderLimit(request.getDailyOrderLimit())
+            .otpEnabled(request.isOtpEnabled())
             .build();
 
         userRepository.save(user);
