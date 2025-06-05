@@ -13,6 +13,7 @@ import com.AccionesUD.AccionesUD.usuario.entity.User;
 import com.AccionesUD.AccionesUD.usuario.repository.PasswordResetTokenRepository;
 import com.AccionesUD.AccionesUD.usuario.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
-
+    @Transactional
     @Override
     public void generateToken(PasswordResetRequestDTO request) {
         String email = request.getEmail();
@@ -41,6 +42,8 @@ import lombok.RequiredArgsConstructor;
 
         tokenRepository.save(resetToken);
         String link = "http://localhost:4200/reset-password?token=" + token;
+        System.out.println("Token generado: " + token);
+        System.out.println("Tiempo de expiración: " + resetToken.getExpiration());
         emailService.sendEmail(email, "Recuperación de contraseña", "Da clic en el enlace: " + link);
     }
 

@@ -12,6 +12,7 @@ import com.AccionesUD.AccionesUD.authentication.dto.PasswordUpdateDTO;
 import com.AccionesUD.AccionesUD.authentication.service.PasswordResetService;
 
 import lombok.RequiredArgsConstructor;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth/password")
@@ -19,21 +20,21 @@ import lombok.RequiredArgsConstructor;
 public class PasswordResetController {
     private final PasswordResetService passwordResetService;
 
-@PostMapping("/request")
-public ResponseEntity<String> requestReset(@RequestBody PasswordResetRequestDTO dto) {
-    passwordResetService.generateToken(dto);
-    return ResponseEntity.ok("Correo de recuperación enviado.");
-}
+    @PostMapping("/request")
+    public ResponseEntity<Map<String, String>> requestReset(@RequestBody PasswordResetRequestDTO dto) {
+        passwordResetService.generateToken(dto);
+        return ResponseEntity.ok(Map.of("message", "Correo de recuperación enviado."));
+    }
 
-@PostMapping("/validate")
-public ResponseEntity<String> validateToken(@RequestBody PasswordResetTokenDTO dto) {
-    passwordResetService.validateToken(dto.getToken());
-    return ResponseEntity.ok("Token válido.");
-}
+    @PostMapping("/validate")
+    public ResponseEntity<Map<String, String>> validateToken(@RequestBody PasswordResetTokenDTO dto) {
+        passwordResetService.validateToken(dto.getToken());
+        return ResponseEntity.ok(Map.of("message", "Token válido."));
+    }
 
-@PostMapping("/update")
-public ResponseEntity<String> updatePassword(@RequestBody PasswordUpdateDTO dto) {
-    passwordResetService.updatePassword(dto);
-    return ResponseEntity.ok("Contraseña actualizada correctamente.");
-}
+    @PostMapping("/update")
+    public ResponseEntity<Map<String, String>> updatePassword(@RequestBody PasswordUpdateDTO dto) {
+        passwordResetService.updatePassword(dto);
+        return ResponseEntity.ok(Map.of("message", "Contraseña actualizada correctamente."));
+    }
 }
