@@ -69,12 +69,11 @@ export class MenuComponent {
           localStorage.setItem('jwt', res.token);
           this.mensaje = 'Inicio de sesión exitoso.';
           this.cerrarModal();
-          this.router.navigate(['/dashboard']);
-        } else if (res.message === 'OTP sent to your email') {
-          // Usuario con OTP
+          this.router.navigate(['/']);
+        } else if (res.otpRequired) {
           this.usernameTemp = loginPayload.username;
           this.showOtpField = true;
-          this.mensaje = 'Se envió un código OTP a tu correo.';
+          this.mensaje = res.message || 'Se envió un código OTP.';
         } else {
           this.mensaje = 'Respuesta inesperada del servidor.';
         }
@@ -95,7 +94,7 @@ export class MenuComponent {
         localStorage.setItem('jwt', res.token);
         this.mensaje = 'Inicio de sesión exitoso.';
         this.cerrarModal();
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         console.error(err);
