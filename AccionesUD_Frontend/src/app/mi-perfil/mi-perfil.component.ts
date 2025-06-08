@@ -14,13 +14,14 @@ import {
   UpdateUserProfileRequest,
 } from '../servicio/gestionusuario/userProfileService';
 import { CommonModule } from '@angular/common';
+import { Menu2Component } from '../menu2/menu2.component';
 
 @Component({
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
   styleUrls: ['./mi-perfil.component.css'],
   standalone: true,
-  imports: [MenuComponent, ReactiveFormsModule, HttpClientModule, CommonModule],
+  imports: [Menu2Component, ReactiveFormsModule, HttpClientModule, CommonModule],
 })
 export class MiPerfilComponent implements OnInit {
   perfilForm!: FormGroup;
@@ -47,8 +48,8 @@ export class MiPerfilComponent implements OnInit {
 
     });
 
-    this.addEmail(); 
-    
+    this.addEmail();
+
     // Cargar datos reales del backend
     this.userProfileService.getMyProfile().subscribe({
       next: (data: UpdateUserProfileRequest) => {
