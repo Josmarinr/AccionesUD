@@ -29,18 +29,20 @@ public class NotificationApplicationService {
 
     // application/NotificationApplicationService.java
 
-public List<Notification> getUserNotifications(String username, String type, String afterDate, String keyword) {
-    if (type != null) {
-        return domainService.getByRecipientAndType(username, type);
-    } else if (afterDate != null) {
-        LocalDateTime date = LocalDateTime.parse(afterDate); // yyyy-MM-ddTHH:mm:ss
-        return domainService.getByRecipientAndDateAfter(username, date);
-    } else if (keyword != null) {
-        return domainService.getByRecipientAndKeyword(username, keyword);
-    } else {
-        return domainService.getByRecipient(username);
+    public List<Notification> getUserNotifications(String username, String type, String afterDate, String keyword) {
+        if (type != null) {
+            return domainService.getByRecipientAndType(username, type);
+        } else if (afterDate != null) {
+            LocalDateTime date = LocalDateTime.parse(afterDate); // yyyy-MM-ddTHH:mm:ss
+            return domainService.getByRecipientAndDateAfter(username, date);
+        } else if (keyword != null) {
+            return domainService.getByRecipientAndKeyword(username, keyword);
+        } else {
+            return domainService.getByRecipient(username);
+        }
     }
-}
 
-
+    public void markAsRead(Long id) {
+        domainService.markAsRead(id);
+    }
 }

@@ -25,6 +25,7 @@
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -110,7 +111,8 @@
   background: #dd2626;
 }
 
-.notification-btn, .menu-btn {
+.notification-btn,
+.menu-btn {
   background-color: transparent;
   border: none;
   font-size: 1.2rem;
@@ -127,7 +129,8 @@
   border: 1px solid rgba(230, 87, 79, 0.2);
   border-radius: 12px;
   width: 200px;
-  display: none; /* Oculto por defecto */
+  display: none;
+  /* Oculto por defecto */
   z-index: 2000;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   /* Agregar animación */
@@ -181,7 +184,7 @@
   background-color: #f7cece;
 }
 
-.menu-btn:hover + .user-dropdown,
+.menu-btn:hover+.user-dropdown,
 .user-dropdown:hover {
   display: none;
 }
@@ -222,7 +225,8 @@
     border: 1px solid rgba(230, 87, 79, 0.2);
     border-radius: 12px;
     width: 200px;
-    display: none; /* Oculto por defecto */
+    display: none;
+    /* Oculto por defecto */
     z-index: 2000;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     /* Agregar animación */
@@ -232,6 +236,7 @@
     position: fixed;
     margin-top: 0px;
   }
+
   .show-dropdown {
     display: block !important;
     opacity: 1;
@@ -304,7 +309,7 @@
   transition: background-color 0.2s ease;
 }
 
-.notification-list a{
+.notification-list a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
@@ -347,6 +352,7 @@
     right: -120px;
   }
 }
+
 @media (max-width: 576px) {
   .notification-dropdown {
     width: 290px;

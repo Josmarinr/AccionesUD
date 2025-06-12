@@ -11,6 +11,7 @@ public class NotificationMapper {
     public Notification toNotification(NotificationRequest request, String recipient) {
         Notification notification = new Notification();
         notification.setType(request.type);
+        notification.setTitle(request.title);
         notification.setMessage(request.message);
         notification.setRecipient(recipient);
         return notification;

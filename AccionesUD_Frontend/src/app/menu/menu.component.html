@@ -20,7 +20,6 @@
   </div>
   <div class="actions">
     <button class="premium-btn">Premium</button>
-    <button *ngIf="usuarioAutenticado" (click)="cerrarSesion()">Cerrar sesión</button>
     <button *ngIf="usuarioAutenticado" (click)="verPerfil()">Mi Perfil</button>
     <button *ngIf="!usuarioAutenticado" class="invertir-btn" (click)="abrirModal()">Invierte ya</button>
   </div>
