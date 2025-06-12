@@ -1,4 +1,4 @@
-<app-menu style="position: fixed; top: 0; left: 0; width: 101vw; z-index: 1000;"></app-menu>
+<app-menu2 style="position: fixed; top: 0; left: 0; width: 101vw; z-index: 1000;"></app-menu2>
 <div class="perfil">
   <div class="perfil-container">
     <button class="cerrar-btn" (click)="cancelarRegistro()" aria-label="Cancelar registro">&times;</button>
@@ -43,10 +43,10 @@
             </div>
           </ng-container>
 
-          <button 
-            type="button" 
-            class="btn-add" 
-            (click)="addEmail()" 
+          <button
+            type="button"
+            class="btn-add"
+            (click)="addEmail()"
             [disabled]="emails.length >= 2">
             + Añadir correo
           </button>
