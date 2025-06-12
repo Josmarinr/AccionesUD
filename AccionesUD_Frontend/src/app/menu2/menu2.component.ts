@@ -1,8 +1,16 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotificacionesService, Notificacion } from '../servicio/notificaciones/notificaciones.service';
+import {
+  NotificacionesService,
+  Notificacion,
+} from '../servicio/notificaciones/notificaciones.service';
 import { DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu2',
@@ -10,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [CommonModule, HttpClientModule],
   templateUrl: './menu2.component.html',
   styleUrl: './menu2.component.css',
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
 export class Menu2Component implements OnInit {
   showDropdown = false;
@@ -18,26 +26,42 @@ export class Menu2Component implements OnInit {
   notificaciones: Notificacion[] = [];
 
   constructor(
+    private http: HttpClient, // AÑADE ESTO
     private notificacionesService: NotificacionesService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router
   ) {}
-
   ngOnInit(): void {
     this.cargarNotificaciones();
   }
 
   cargarNotificaciones(): void {
-    this.notificacionesService.getNotificaciones().subscribe({
-      next: (data) => {
-        // Ordenar por fecha (las más recientes primero)
-        this.notificaciones = data.sort((a, b) =>
-          new Date(b.fecha_de_notificacion).getTime() - new Date(a.fecha_de_notificacion).getTime()
-        ).slice(0, 5); // Tomar solo las 5 primeras
-      },
-      error: (error) => {
-        console.error('Error al cargar notificaciones:', error);
-      }
-    });
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+      console.error('Token JWT no encontrado.');
+      return;
+    }
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.http
+      .get<Notificacion[]>('http://localhost:8080/api/notifications', {
+        headers,
+      })
+      .subscribe({
+        next: (data) => {
+          this.notificaciones = data
+            .sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+            .slice(0, 5);
+        },
+        error: (error) => {
+          console.error('Error al cargar notificaciones:', error);
+        },
+      });
   }
 
   toggleDropdown(event: Event): void {
@@ -58,13 +82,15 @@ export class Menu2Component implements OnInit {
     }
   }
 
-  formatFecha(fecha: Date): string {
-    return this.datePipe.transform(fecha, 'dd/MM/yyyy') || '';
+  formatFecha(fecha: string | null): string {
+    if (!fecha) return '';
+    const fechaObj = new Date(fecha);
+    return this.datePipe.transform(fechaObj, 'dd/MM/yyyy HH:mm') || '';
   }
 
   marcarTodasComoLeidas(): void {
-    this.notificaciones.forEach(notif => {
-      notif.leida_notificacion = true;
+    this.notificaciones.forEach((notif) => {
+      notif.read = true;
     });
   }
 
@@ -74,19 +100,40 @@ export class Menu2Component implements OnInit {
     const menuBtn = document.querySelector('.menu-btn');
     const dropdown = document.querySelector('.user-dropdown');
 
-    if (menuBtn && dropdown &&
-        !menuBtn.contains(event.target as Node) &&
-        !dropdown.contains(event.target as Node)) {
+    if (
+      menuBtn &&
+      dropdown &&
+      !menuBtn.contains(event.target as Node) &&
+      !dropdown.contains(event.target as Node)
+    ) {
       this.showDropdown = false;
     }
 
     const notificationBtn = document.querySelector('.notification-btn');
-    const notificationDropdown = document.querySelector('.notification-dropdown');
+    const notificationDropdown = document.querySelector(
+      '.notification-dropdown'
+    );
 
-    if (notificationBtn && notificationDropdown &&
-        !notificationBtn.contains(event.target as Node) &&
-        !notificationDropdown.contains(event.target as Node)) {
+    if (
+      notificationBtn &&
+      notificationDropdown &&
+      !notificationBtn.contains(event.target as Node) &&
+      !notificationDropdown.contains(event.target as Node)
+    ) {
       this.showNotifications = false;
     }
+  }
+
+  cerrarSesion() {
+    localStorage.removeItem('jwt');
+    this.router.navigate(['/']);
+  }
+
+  get usuarioAutenticado(): boolean {
+    const token = localStorage.getItem('jwt');
+    if (!token) return false;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return Date.now() < payload.exp * 1000;
   }
 }
