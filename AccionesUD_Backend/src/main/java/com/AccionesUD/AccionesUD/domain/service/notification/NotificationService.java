@@ -22,6 +22,15 @@ public class NotificationService {
         return repository.save(notification);
     }
 
+    public Notification getById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Notificación no encontrada"));
+    }
+
+    // NotificationService.java
+    public void markAsRead(Long id) {
+        repository.markAsRead(id);
+    }
+
     // domain/service/notification/NotificationService.java
 public List<Notification> getByRecipient(String username) {
     return repository.findByRecipient(username);
