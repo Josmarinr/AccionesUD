@@ -14,4 +14,42 @@
       <li><a href="#">Políticas</a></li>
     </ul>
   </div>
+  <div class="user-actions">
+    <a href="#" class="premium-btn">Premium</a>
+    <a class="notification-btn" (click)="toggleNotifications($event)"><i class="fas fa-bell"></i></a>
+    <div class="notification-dropdown" [class.show-notifications]="showNotifications">
+        <div class="notification-header">
+          <span>Notificaciones</span>
+        </div>
+
+        <ul class="notification-list">
+          <a href="/notificaciones">
+          <li *ngFor="let notif of notificaciones"
+              [class.notificacion-leida]="notif.leida_notificacion">
+
+              <span class="notification-text">{{ notif.titulo_de_notificacion }}</span>
+              <span class="notification-date">{{ formatFecha(notif.fecha_de_notificacion) }}</span>
+          </li>
+          </a>
+          <li *ngIf="notificaciones.length === 0" class="no-notificaciones">
+            <span>No hay notificaciones</span>
+          </li>
+        </ul>
+
+        <div class="notification-footer">
+          <a href="/notificaciones">Ver todas las notificaciones</a>
+        </div>
+      </div>
+
+
+
+    <a class="menu-btn" (click)="toggleDropdown($event)"><i class="fas fa-bars"></i></a>
+    <div class="user-dropdown" [class.show-dropdown]="showDropdown">
+      <ul>
+        <li><a href="#"><i class="fas fa-user"></i> Mi perfil</a></li>
+        <li><a href="#" class="misOrdenes"><i class="fas fa-file-alt"></i> Mis Ordenes</a></li>
+        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+      </ul>
+    </div>
+  </div>
 </nav>
