@@ -1,16 +1,16 @@
 package com.AccionesUD.AccionesUD.controller.notification;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import com.AccionesUD.AccionesUD.application.NotificationApplicationService;
+import com.AccionesUD.AccionesUD.application.notification.NotificationApplicationService;
 import com.AccionesUD.AccionesUD.domain.model.notification.Notification;
 import com.AccionesUD.AccionesUD.dto.notification.NotificationRequest;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/notifications")
 public class NotificationController {
@@ -41,6 +41,13 @@ public class NotificationController {
         List<Notification> results = service.getUserNotifications(username, type, afterDate, keyword);
         return ResponseEntity.ok(results);
     }
+
+    @PatchMapping("/{id}/read")
+        public ResponseEntity<Void> markAsRead(@PathVariable Long id) {
+        service.markAsRead(id);
+        return ResponseEntity.ok().build();
+}
+
 
 
 }

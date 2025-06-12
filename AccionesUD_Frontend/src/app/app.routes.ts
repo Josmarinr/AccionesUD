@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { VistaRegistroComponent } from './vista-registro/vista-registro.component';
 import { CuerpoPrincipalComponent } from './cuerpo-principal/cuerpo-principal.component';
 import { MenuComponent } from './menu/menu.component';
+import { Menu2Component } from './menu2/menu2.component';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -12,7 +13,7 @@ import { NotificacionesComponent } from './notificaciones/notificaciones.compone
 export const routes: Routes = [
   { path: '', component: CuerpoPrincipalComponent },
   { path: 'registro', component: VistaRegistroComponent },
-  //{ path: '', component: MenuComponent },
+  { path: 'login', component: Menu2Component,  canActivate: [AuthGuard] },
   {
     path: 'dashboard',
     component: DashboardComponent,

@@ -2,7 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificacionesService, Notificacion } from '../servicio/notificaciones/notificaciones.service';
 import { DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu2',
@@ -18,27 +19,37 @@ export class Menu2Component implements OnInit {
   notificaciones: Notificacion[] = [];
 
   constructor(
+    private http: HttpClient, // AÑADE ESTO
     private notificacionesService: NotificacionesService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router
   ) {}
-
   ngOnInit(): void {
     this.cargarNotificaciones();
   }
 
-  cargarNotificaciones(): void {
-    this.notificacionesService.getNotificaciones().subscribe({
+cargarNotificaciones(): void {
+  const token = localStorage.getItem('jwt');
+  if (!token) {
+    console.error('Token JWT no encontrado.');
+    return;
+  }
+
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  this.http.get<Notificacion[]>('http://localhost:8080/api/notifications', { headers })
+    .subscribe({
       next: (data) => {
-        // Ordenar por fecha (las más recientes primero)
-        this.notificaciones = data.sort((a, b) =>
-          new Date(b.fecha_de_notificacion).getTime() - new Date(a.fecha_de_notificacion).getTime()
-        ).slice(0, 5); // Tomar solo las 5 primeras
+        this.notificaciones = data
+          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+          .slice(0, 5);
       },
       error: (error) => {
         console.error('Error al cargar notificaciones:', error);
       }
     });
-  }
+}
+
 
   toggleDropdown(event: Event): void {
     event.preventDefault();
@@ -58,13 +69,16 @@ export class Menu2Component implements OnInit {
     }
   }
 
-  formatFecha(fecha: Date): string {
-    return this.datePipe.transform(fecha, 'dd/MM/yyyy') || '';
-  }
+ formatFecha(fecha: string | null): string {
+  if (!fecha) return '';
+  const fechaObj = new Date(fecha);
+  return this.datePipe.transform(fechaObj, 'dd/MM/yyyy HH:mm') || '';
+}
+
 
   marcarTodasComoLeidas(): void {
     this.notificaciones.forEach(notif => {
-      notif.leida_notificacion = true;
+      notif.read = true;
     });
   }
 
@@ -89,4 +103,19 @@ export class Menu2Component implements OnInit {
       this.showNotifications = false;
     }
   }
+
+    cerrarSesion() {
+    localStorage.removeItem('jwt');
+    this.router.navigate(['/']);
+  }
+
+    get usuarioAutenticado(): boolean {
+    const token = localStorage.getItem('jwt');
+    if (!token) return false;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return Date.now() < payload.exp * 1000;
+  }
+
+  
 }

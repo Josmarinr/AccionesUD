@@ -1,37 +1,62 @@
 <app-menu2 style="position: fixed; top: 0; left: 0; width: 101vw; z-index: 1000;"></app-menu2>
+
+
 <div class="notificaciones">
   <div class="notificaciones-container">
     <div class="notificaciones-header">
       <h1>Todas las notificaciones</h1>
       <div class="notificaciones-actions">
         <button class="btn-buscar">
-          <input type="text" placeholder="Buscar notificaciones..." class="input-buscar">
+          <input
+            type="text"
+            placeholder="Buscar notificaciones..."
+            class="input-buscar"
+            [(ngModel)]="busqueda"
+            (input)="filtrarYBuscar()"
+          />
           <i class="fas fa-search"></i> Buscar
         </button>
-        <button class="btn-filtrar">
-          <i class="fas fa-filter"></i> Todas
-        </button>
+
+    <div class="dropdown-filtro" (click)="mostrarOpciones = !mostrarOpciones">
+      <button class="btn-filtrar">
+        <i class="fas fa-filter"></i> {{ tipoFiltro === 'TODAS' ? 'Todas' : tipoFiltro }}
+      </button>
+
+      <ul class="filtro-opciones" *ngIf="mostrarOpciones">
+        <li (click)="seleccionarFiltro('TODAS')">Todas</li>
+        <li (click)="seleccionarFiltro('INFO')">Info</li>
+        <li (click)="seleccionarFiltro('OPERACION')">Operación</li>
+        <li (click)="seleccionarFiltro('TRANSACCION')">Transacción</li>
+        <!-- Agrega más tipos si los tienes -->
+      </ul>
+    </div>
+
       </div>
     </div>
 
     <div class="notificaciones-list">
-      <div class="notificacion-item" *ngFor="let notif of notificaciones; let i = index"
-          [class.expanded]="isExpanded(i)"
-          [class.leida]="notif.leida_notificacion">
+      <div
+        class="notificacion-item"
+        *ngFor="let notif of notificaciones; let i = index"
+        [class.expanded]="isExpanded(i)"
+        [class.leida]="notif.read"
+      >
         <div class="notificacion-content">
           <div class="notificacion-header">
-            <h3 class="notificacion-title">{{ notif.titulo_de_notificacion }}</h3>
-            <span class="notificacion-fecha">{{ formatFecha(notif.fecha_de_notificacion) }}</span>
+            <h3 class="notificacion-title">{{ notif.title }}</h3>
+            <span class="notificacion-fecha">{{ formatFecha(notif.createdAt) }}</span>
           </div>
+
           <p class="notificacion-descripcion">
             <ng-container *ngIf="isExpanded(i); else contraido">
-              {{ notif.texto_de_notificacion }}
+              {{ notif.message }}
             </ng-container>
             <ng-template #contraido>
-              {{ notif.texto_de_notificacion | slice:0:100 }}{{ notif.texto_de_notificacion.length > 100 ? '...' : '' }}
+              {{ notif.message | slice: 0:100 }}{{ notif.message.length > 100 ? '...' : '' }}
             </ng-template>
           </p>
         </div>
+
         <div class="notificacion-toggle" (click)="toggleNotificacion(i)">
           <i class="fas" [ngClass]="{'fa-chevron-down': !isExpanded(i), 'fa-chevron-up': isExpanded(i)}"></i>
         </div>
@@ -43,4 +68,5 @@
     </div>
   </div>
 </div>
+
 <app-pie-pagina-principal></app-pie-pagina-principal>
