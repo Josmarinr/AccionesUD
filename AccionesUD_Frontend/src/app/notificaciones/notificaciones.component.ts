@@ -117,10 +117,21 @@ export class NotificacionesComponent implements OnInit {
       const titulo = notif.title?.toLowerCase() || '';
       const mensaje = notif.message?.toLowerCase() || '';
       const coincideTexto = titulo.includes(texto) || mensaje.includes(texto);
+
       const coincideTipo =
-        this.tipoFiltro === 'TODAS' || notif.type === this.tipoFiltro;
+        this.tipoFiltro === 'TODAS' ||
+        notif.type === this.tipoFiltro ||
+        (this.tipoFiltro === 'Leídas' && notif.read) ||
+        (this.tipoFiltro === 'Sin leer' && !notif.read);
+
       return coincideTexto && coincideTipo;
     });
+
+    // Ordenar por fecha (las más recientes primero)
+    this.notificaciones.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
   }
 
   mostrarOpciones: boolean = false;

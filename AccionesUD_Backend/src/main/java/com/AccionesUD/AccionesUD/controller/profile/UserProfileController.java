@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.AccionesUD.AccionesUD.application.profile.UserProfileApplicationService;
 import com.AccionesUD.AccionesUD.dto.profile.UpdateUserProfileRequest;
@@ -27,7 +28,8 @@ public class UserProfileController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UserProfileResponse> getMyProfile(Authentication auth) {
+    public ResponseEntity<UserProfileResponse> getMyProfile() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return ResponseEntity.ok(appService.getProfile(auth.getName()));
     }
 }

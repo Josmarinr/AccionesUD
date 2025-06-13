@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 import com.AccionesUD.AccionesUD.utilities.orders.OrderType;
 
+import lombok.Data;
+
+@Data
 public class OrderRequestDTO {
 
     private String symbol;
