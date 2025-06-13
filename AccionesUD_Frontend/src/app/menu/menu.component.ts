@@ -76,17 +76,20 @@ export class MenuComponent {
         .post<any>('http://localhost:8080/auth/login', loginPayload)
         .subscribe({
           next: (res) => {
+            console.log('Respuesta del login:', res);
+
             if (res.token) {
-              // Usuario sin OTP, login completo
+              // Usuario sin OTP
               localStorage.setItem('jwt', res.token);
               this.mensaje = 'Inicio de sesión exitoso.';
               this.cerrarModal();
-              this.router.navigate(['/login']);
-            } else if (res.message === 'OTP sent to your email') {
+              this.router.navigate(['/']);
+            } else if (res.otpRequired) {
               // Usuario con OTP
               this.usernameTemp = loginPayload.username;
               this.showOtpField = true;
-              this.mensaje = 'Se envió un código OTP a tu correo.';
+              this.mensaje =
+                res.message || 'Se envió un código OTP a tu correo.';
             } else {
               this.mensaje = 'Respuesta inesperada del servidor.';
             }
